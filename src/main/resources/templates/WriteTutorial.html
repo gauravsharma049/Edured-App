@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::head}, ~{:: .content}, ~{::script})">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title th:text="${title}"></title>
+    <link rel="stylesheet" th:href="@{/css/parts/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/parts/dashboard.css}">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/ckeditor/full/ckeditor.js}"></script>
+</head>
+
+<body>
+    <div class="content pt-3">
+
+        <div class="px-3">
+            <h1><em><strong><span style="font-family:Comic Sans MS,cursive"><span style="font-size:28px">Add New Tutorial</span></span></strong></em></h1>
+        <form action="/teacher/add-tutorial" class="py-1" method="post" th:object="${topic}">
+            <div class="row py-1">
+                <div class="col">
+                    <select name="" id="courseName" class="form-control">
+                        <option value="2">Select Course</option>
+                        <span th:each="c : ${courses}">
+                            <option th:value="${c.id}" th:text="${c.courseName}"></option>
+                        </span>
+                    </select>
+                </div>
+                <div class="col">
+                    <select name="" id="lessonName" class="form-control" th:field="*{lesson.id}">
+                        <option value="1">Select Lesson</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row py-1">
+                <div class="col">
+                    <input type="text" id="topicName" placeholder="topic name" class="form-control" th:field="*{name}">
+                </div>
+                <div class="col">
+                    <input type="text" id="slug" placeholder="topic-slug" class="form-control" th:field="*{slug}">
+                </div>
+            </div>
+            <br>
+            <textarea class="d-none" name="" id="mytext" cols="30" rows="10" th:field="*{content}"></textarea>
+            <textarea name="editor" id="editor1"></textarea>
+            <button class="form-control btn btn-primary my-1 btn-sm" type="submit">Add</button>
+        </form>
+        </div>
+        
+    </div>
+    <script>
+        const courseSelect = document.getElementById("courseName");
+        const lessonSelect = document.getElementById("lessonName");
+        const topicName = document.getElementById("topicName");
+        topicName.addEventListener("change", function (e) {
+            const enteredTopicName = e.target.value;
+            var slug = enteredTopicName.toLowerCase().split(' ').join('-');
+            if(slug.startsWith("-") || slug.endsWith("-")){
+               alert("remove extra spaces")
+            }
+            else{
+                document.getElementById("slug").value = slug;
+            }
+            console.log(enteredTopicName);
+        });
+        courseSelect.addEventListener("change", function () {
+            const selectedCourseValue = this.value;
+            console.log(selectedCourseValue)
+            getCourses(lessonSelect, selectedCourseValue);
+        });
+        function getCourses(element, selectedCourseValue) {
+
+            $.ajax({
+                url: '/rest/lesson/c/' + selectedCourseValue,
+                type: 'GET',
+                contentType: "application/json",
+                dataType: "json",
+                success: function (data) {
+                    var selectElement = document.getElementById("lessonName");
+                    var optionElement = `<option value="1">Select Lesson</option>`;
+                    data.forEach(function (element) {
+                        var optionValue = element.id;
+                        var optionText = element.name;
+                        optionElement += `<option value="${optionValue}">${optionText}</option>`;
+                    });
+                    selectElement.innerHTML = optionElement;
+                },
+                error: function (e) {
+                    alert("error");
+                    console.log(e);
+                }
+            });
+
+        }
+
+   
+        var editor = CKEDITOR.replace('editor1');
+
+        // The "change" event is fired whenever a change is made in the editor.
+        editor.on('change', function (evt) {
+            // getData() returns CKEditor's HTML content.
+            document.getElementById("mytext").innerText = evt.editor.getData();
+            console.log(evt.editor.getData());
+        });
+    </script>
+
+</body>
+
+</html>

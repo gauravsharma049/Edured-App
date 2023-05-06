@@ -1,0 +1,431 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&family=Montserrat:ital,wght@0,100;0,200;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,500;1,700;1,800&family=Moon+Dance&family=The+Nautigal:wght@400;700&display=swap');
+@import "https://use.fontawesome.com/releases/v5.5.0/css/all.css";
+
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: rgb(55, 91, 91);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(151, 142, 142);
+    cursor: pointer;
+}
+body{
+    font-family: sans-serif;
+}
+.darkmode{
+    height: 35px;
+    background-color: white;
+    border: 2px solid black;
+    width: 60px;
+    border-radius: 40px;
+    padding: 3.5px 1px;
+    box-sizing: border-box;
+    outline: 1px solid white;
+    
+}
+
+.darkmodeinside{
+    display: inline-block;
+    height: 25px;
+    background-color: black;
+    width: 25px;
+    border-radius: 50%;
+
+}
+.darkModeHint{
+    display: inline-block;
+    position: sticky;
+    bottom: 55px;
+    left: 45px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-weight: 400;
+    visibility: hidden;
+    color: black;
+    
+}
+.button{
+    color: black;
+}
+.content{
+    background-color: #b8dde3;
+    /* height: 98vh; */
+    height: fit-content;
+    max-height: fit-content;
+    padding-top: 50px;
+    box-sizing: border-box;
+    /* box-shadow: 0px 2px 10px #505960; */
+}
+
+.cover_details p {
+    font-size: 18px;
+    line-height: 30px;
+    color: #67677c;
+    font-weight: 400;
+}
+.cover_details{
+    /* background-color: blue; */
+    padding: 20px 2em;
+    width: 40%;
+}
+.cover_photo{
+    /* background-color: red; */
+    padding: 20px 2em;
+    width: 60%;
+}
+
+
+
+.cover_details h1{
+    font-weight: 700;
+}
+
+.burgerbtn{
+    border: 1px solid black;
+    width: fit-content;
+    border-radius: 5px;
+}
+.burgerbtn-in{
+    background-color: black;
+    width: 20px;
+    height: 2px;
+    margin: 5px;
+    border-radius: 5px;
+    
+}
+.img-fluid{
+    /* max-width: 80%; */
+    /* max-height: 80%; */
+    user-select: none;
+}
+.courses{
+    /* border: 1px solid black; */
+    width: 20%;
+    /* padding: 20px 2em; */
+}
+.coursebox{
+    width: 80%;
+}
+.course_list{
+    width: 20%;
+}
+
+.course_list_in{
+    /* background-color: #4077d6ee; */
+    height: 200px;
+    border-radius: 5px;
+    padding: 15px 1.2em;
+    border: .2px solid #4141415c;
+    box-shadow: 2px 2px 10px #414141bd;
+    
+}
+.course_list_in:hover{
+    transform: scale(1.05);
+    /* background-color: pink; */
+}
+.footer-item{
+    /* height: 500px; */
+    border: .5px solid #4141415c;
+    border-radius: 5px;
+    
+}
+.footer-list{
+    width: 22%;
+}
+.subscribe{
+    width: 34%;
+}
+.card-footer{
+    padding-top: 120px;
+    background-color: #141c3ae6;
+}
+.footer-item h4{
+    font-size: 18px;
+    line-height: 28px;
+}
+.footer-item p, .footer-link-list{
+    color: #c1c1cb;
+}
+.footer-end{
+    padding: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.subscribe-panel{
+    margin-bottom: 30px;
+    user-select: none;
+}
+.join-btn{
+    color: white;
+    height: fit-content;
+    font-size: 18px;
+    padding: 5px 20px;
+    border-radius: 0 5px 5px 0;
+    border: .5px solid #4141415c;
+    background-color: #2b4eff;
+    position: absolute;
+    font-weight: bold;
+    line-height: 1.5;
+}
+.join-btn:hover{
+    background-color: #2b4eff8a;
+}
+.subscribe-form-input{
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+ul{
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 4px;
+}
+.footer-item ul, .footer-item ol{
+    list-style: none;
+}
+
+.footer-link-list{
+    margin-bottom: 12px;
+}
+.footer-link a{
+    text-decoration: none;
+}
+.footer-link li:hover{
+    color: white;
+}
+.copyright-edured-symbol{
+    font-size: 18px;
+    
+}
+.subscribe_hr{
+    visibility: hidden;
+    width: 108%;
+}
+
+.course_list_in{
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    flex-direction: column;
+  }
+  .imgcontainer{
+    background-color: #0e1133;
+    margin: auto;
+    border-radius: 50px;
+    width: 100px;
+    padding: 15px;
+  }
+  .imgcontainer img{
+    max-width: 100%;
+    height: auto;
+  }
+
+/* ***************************************** */
+/* ********* Login Page CSS **************** */
+
+/* sign in FORM */
+#logreg-forms{
+    /* width:412px;
+    margin:10vh auto; */
+    background-color:#f3f3f3;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+#logreg-forms form {
+    width: 100%;
+    max-width: 410px;
+    padding: 15px 0;
+    margin: auto;
+}
+#logreg-forms .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+#logreg-forms .form-control:focus { z-index: 2; }
+#logreg-forms .form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+#logreg-forms .form-signin input[type="password"] {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+#logreg-forms .social-login{
+    /* width:390px; */
+    margin:0 auto;
+    margin-bottom: 14px;
+}
+#logreg-forms .social-btn{
+    font-weight: 100;
+    color:white;
+    width:202px;
+    font-size: 0.9rem;
+}
+
+#logreg-forms a{
+    display: block;
+    width: fit-content;
+    padding-top:10px;
+    color:lightseagreen;
+}
+
+#logreg-form .lines{
+    width:200px;
+    border:1px solid red;
+}
+
+
+#logreg-forms button[type="submit"]{ margin-top:10px; }
+
+#logreg-forms .facebook-btn{  background-color:#3C589C; }
+
+#logreg-forms .google-btn{ background-color: #DF4B3B; }
+
+#logreg-forms .form-reset, #logreg-forms .form-signup{ display: none; }
+
+#logreg-forms .form-signup .social-btn{ width:202px; }
+
+#logreg-forms .form-signup input { margin-bottom: 2px;}
+
+.form-signup .social-login{
+    /* width:210px !important; */
+    margin: 0 auto;
+}
+
+/* Mobile */
+
+@media screen and (max-width:500px){
+    
+
+    #logreg-forms  .social-login{
+        width:200px;
+        margin:0 auto;
+        margin-bottom: 10px;
+    }
+    #logreg-forms  .social-btn{
+        font-size: 1.3rem;
+        font-weight: 100;
+        color:white;
+        width:200px;
+        height: 56px;
+
+    }
+    #logreg-forms .social-btn:nth-child(1){
+        margin-bottom: 5px;
+    }
+    #logreg-forms .social-btn span{
+        display: none;
+    }
+    #logreg-forms  .facebook-btn:after{
+        content:'Facebook';
+    }
+
+    #logreg-forms  .google-btn:after{
+        content:'Google';
+    }
+    #logreg-forms form {
+        padding: 15px 10px;
+    }
+
+}
+
+
+/* ********** Loging page CSS Ends ********* */
+/* ***************************************** */
+
+@media screen and (max-width: 1139px){
+    .courses{
+        width: 100%;
+    }
+    .coursebox{
+        width: 100%;
+    }
+    .course_list{
+        width: 19%;
+        margin: 2px;
+    }
+    
+}
+
+@media screen and (max-width: 991px) {
+    .cover_details{
+        width: 50%;
+    }
+    .cover_photo{
+        width: 50%;
+    }
+    .course_list{
+        width: 30%;
+        margin: 10px;
+    }
+    .subscribe{
+        width: 40%;
+    }
+    .footer-list{
+        width: 30%;
+    }
+}
+@media screen and (max-width: 767px) {
+    .cover_details{
+        width: 100%;
+    }
+    .cover_photo{
+        width: 100%;
+    }
+    .content{
+        height: fit-content;
+    }
+    .course_list{
+        width: 48%;
+        margin: 2px;
+    }
+    .subscribe{
+        width: 100%;
+    }
+    .footer-list{
+        width: 50%;
+    }
+    .footer-end{
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        flex-wrap: wrap;
+        line-height: normal;
+    }
+    .subscribe_hr{
+        visibility: visible;
+    }
+}
+
+@media screen and (max-width: 363px){
+    .course_list{
+        width: 100%;
+    }
+}

@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Stick+No+Bills:wght@700;800&display=swap');
+
+
+.hex {
+    margin-top: 30px;
+    width: 80px;
+    height: 55px;
+    background-color: #27aae1;
+    border-color: #27aae1;
+    position: relative;
+    display: inline-block;
+    border-radius: 9px;
+  }
+  .hex:before {
+    content: " ";
+    width: 0;
+    height: 0;
+    border-bottom: 25px solid;
+    border-color: inherit;
+    border-left: 40px solid transparent;
+    border-right: 40px solid transparent;
+    position: absolute;
+    top: -21px;
+    border-radius: 10px;
+  }
+  .hex:after {
+    content: "";
+    width: 0;
+    position: absolute;
+    bottom: -21px;
+    border-radius: 10px;
+    border-top: 25px solid;
+    border-color: inherit;
+    border-left: 40px solid transparent;
+    border-right: 40px solid transparent;
+  }
+  
+  .prosubscription{
+    border: 1px solid white;
+    padding: 2px 5px;
+    border-radius: 15px;
+    box-shadow: 0 0 5px #ac01f7;
+    color: #ac01f7;
+    background-color: #d100ff36;
+    font-family: ui-monospace;
+  }

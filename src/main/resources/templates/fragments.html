@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div th:fragment="header">
+        <h1>Thymeleaf Fragments sample</h1>
+    </div>
+
+    <li th:fragment="list(link, text, icon)" class="nav-item">
+        <a th:switch="${icon}" class="nav-link" th:href="${link}">
+            <i th:case="'add-user'" class="fas fa-fw fa-user-plus"></i>
+            <i th:case="'update'" class="fas fa-fw fa-pen-nib"></i>
+            <i th:case="'user'" class="fas fa-fw fa-user"></i>
+            <i th:case="'user-card'" class="fas fa-fw fa-address-card"></i>
+            <i th:case="'hostel'" class="fas fa-fw fa-hotel"></i>
+            <i th:case="'payment'" class="fas fa-fw fa-credit-card"></i>
+            <i th:case="'receipt'" class="fas fa-fw fa-receipt"></i>
+            <i th:case="'password'" class="fas fa-fw fa-key"></i>
+            <i th:case="*" class="fas fa-fw fa-table"></i>
+
+            <span th:text="${text}"></span>
+        </a>
+    </li>
+
+    <div th:fragment="course-card(link, imgSrc, name)" class="course_list col mb-4 rounded-3">
+        <a class="text-decoration-none " style="color: unset;" th:href="${link}">
+            <div class="course_list_in">
+                <div class="imgcontainer"><img th:src="${imgSrc}" alt=""></div>
+                <div th:text="${name}"></div>
+            </div>
+        </a>
+    </div>
+    <div th:fragment="course-card2(obj)" class="course_list col mb-4 rounded-3">
+        <a class="text-decoration-none " style="color: unset;" th:href="${obj.link}">
+            <div class="course_list_in">
+                <div class="imgcontainer"><img th:src="${obj.imgSrc}" alt=""></div>
+                <div th:text="${obj.name}"></div>
+            </div>
+        </a>
+    </div>
+
+    <div th:fragment="card(link,heading, text, class, icon)" class="col-xl-3 col-md-6 mb-4">
+        <a class="text-decoration-none" th:href="${link}">
+            <div th:class="'card shadow h-100 py-2 border-left-'+${class}">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div th:class="'text-sm font-weight-bold text-uppercase mb-1 text-'+${class}"
+                                th:text="${heading}">
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${text}"></div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div th:fragment="card-col(link,heading, text, class, icon)" class="col-lg-12 mb-4">
+        <a class="text-decoration-none" th:href="${link}">
+            <div th:class="'card shadow h-100 py-2 border-left-'+${class}">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div th:class="'text-sm font-weight-bold text-uppercase mb-1 text-'+${class}"
+                                th:text="${heading}">
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${text}"></div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div th:fragment="card-progress(progress)" class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-sm font-weight-bold text-info text-uppercase mb-1">Tasks
+                        </div>
+                        <div class="row no-gutters align-items-center">
+                            <div class="col-auto">
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" th:text="${progress}+'%'">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="progress progress-sm mr-2">
+                                    <div class="progress-bar bg-info" role="progressbar"
+                                        th:style="'width: '+${progress}+'%'" th:aria-valuenow="${progress}"
+                                        aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div th:fragment="areachart(id)" class="col-xl-8 col-lg-7">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+                <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                        aria-labelledby="dropdownMenuLink">
+                        <div class="dropdown-header">Dropdown Header:</div>
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="chart-area">
+                    <canvas th:if="${id} == '1'" id="myAreaChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:fragment="imgcard" class="col-xl-8 col-lg-7">
+        <div class="mb-4">
+
+        </div>
+    </div>
+    <div class="col-xl-4 col-lg-5">
+        <div class="mb-4">
+
+        </div>
+    </div>
+</body>
+
+</html>

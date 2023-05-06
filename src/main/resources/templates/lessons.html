@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::head}, ~{:: .content}, ~{::script})">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title th:text="${title}"></title>
+    <link rel="stylesheet" th:href="@{/css/parts/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/parts/lessons.css}">
+</head>
+
+<body>
+    <div class="content pt-2">
+        <div class="cover container">
+            <div class="row m-0 w-100">
+                <div class="index-table col-4 mb-4 rounded-3 ">
+                    <div style="padding-bottom: 1px;">
+                        <div class="table-content-toggle-btn">
+                            <div id="content-table">Table of Contents</div>
+                            <div>
+                                <input type="checkbox" checked name="" id="clikingbtn">
+                                <label for="clikingbtn">
+                                    <div class="checkbox-btn btn btn-sm btn-primary" onclick="toggle()">click</div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="index-table-content bg-white" id="lesson-index">
+                        <div th:each="l : ${lessons}">
+                            <div class="lessonName" th:text="${l.name}"></div>
+                            <div th:each="t : ${l.topics}">
+                                <div th:if="${t.name !=''}" class="topicName">
+                                    <a th:href="@{/t/{s1}/{s2}(s1=${t.lesson.course.slug}, s2=${t.slug})}">
+                                        <div th:text="${t.name}"></div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="index-table-content"></div>
+                    <div class="index-table-content"></div>
+                    <div class="index-table-content"></div>
+                    <div class="index-table-content">25632</div> -->
+                </div>
+
+                <div class="course-content col mb-4 rounded-3 ">
+                    <div id="courseContent" class="course-content-topics">
+                        <!-- <div th:text="${topic.content}"></div> -->
+                        <!-- below code will write the styled html on browser -->
+                        [(${topic.content})]
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var url = window.location.pathname;
+        var links = document.querySelectorAll('.index-table-content a');
+        links.forEach(link => {
+            if (link.getAttribute('href') === url) {
+            link.parentNode.classList.add('active');
+        }
+        });
+
+
+        var elem = document.getElementById("lesson-index").parentElement;
+var childElem = document.getElementById("lesson-index");
+var classes = elem.classList.value;
+var toggleBtn = document.querySelector('.table-content-toggle-btn');
+console.log(classes);
+
+
+//window event listner
+window.addEventListener('resize', function (event) {
+    // var width = window.innerWidth;
+    // if (width <= 1024) {
+    //     elem.className = "newLessonIndex";
+    //     childElem.style.display = "none";
+    //     document.getElementById("content-table").style.display = "none"; 
+    //     toggleBtn.style.padding = "0px";
+    //     toggleBtn.style.boxShadow = "none";
+    //     toggleBtn.style.display = "inline";
+    // }
+    // else if (width > 1024) {
+    //     // elem.style.display = "none";
+    //     elem.className = classes;
+    //     childElem.style.display = "block";
+    //     // toggleBtn.style.display = "none";
+    // }
+    // console.log(elem);
+    controlWidth();
+});
+function controlWidth(){
+    var width = window.innerWidth;
+    if (width <= 1024) {
+        elem.className = "newLessonIndex";
+        childElem.style.display = "none";
+        document.getElementById("content-table").style.display = "none"; 
+        toggleBtn.style.padding = "0px";
+        // toggleBtn.style.boxShadow = "none";
+        toggleBtn.style.display = "inline";
+    }
+    else if (width > 1024) {
+        // elem.style.display = "none";
+        elem.className = classes;
+        childElem.style.display = "block";
+        toggleBtn.style.display = "none";
+    }
+}
+controlWidth();
+function toggle() {
+    var checkbox = document.getElementById('clikingbtn');
+    // var toggleBtn = document.querySelector('.table-content-toggle-btn');
+    if (checkbox.checked) {
+        document.getElementById("lesson-index").style.display = "block";
+        document.getElementById("content-table").style.display = "block";
+        toggleBtn.style.display = "flex";
+    }
+    else {
+        console.log(checkbox.value);
+        document.getElementById("lesson-index").style.display = "none";
+        document.getElementById("content-table").style.display = "none";
+        toggleBtn.style.padding = "0px";
+        toggleBtn.style.boxShadow = "none";
+        toggleBtn.style.display = "inline";
+    }
+}
+
+    // document.querySelector("lesson-index").addEventListener("click", function (e){
+    //     var checkbox = document.getElementById('clikingbtn');
+    //     checkbox.checked = false; 
+    //     alert("hi")
+    // });
+
+    </script>
+</body>
+
+</html>

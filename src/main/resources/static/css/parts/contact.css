@@ -1,0 +1,19 @@
+.strip{
+    height: 193px;
+    line-height: 193px;
+}
+@media screen and (min-width: 768px) {
+    .strip{
+        height: 293px;
+        line-height: 293px;
+    }
+}
+.boldheading{
+    font-size: 30px;
+    font-weight: bold;
+    color: rgb(38, 37, 37);
+    user-select: none;
+}
+.noboxshdo:focus{
+    box-shadow: none;
+}
