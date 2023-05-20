@@ -1,6 +1,7 @@
 package com.edured.model.users;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -22,6 +23,7 @@ public class EduredUser {
     @Column(unique=true)
     private String username;
     private String role;
+    @JsonBackReference
     private String password;
     private String registeredDate;
 }

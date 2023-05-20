@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::head}, ~{:: .content}, ~{::script})">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title th:text="${title}"></title>
+    <link rel="stylesheet" th:href="@{/css/parts/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script th:src="@{/js/ckeditor/full/ckeditor.js}"></script>
+
+</head>
+<body>
+    <div class="content pt-0">
+        
+        <div class="px-3">
+            <h1><em><strong><span style="font-family:Comic Sans MS,cursive"><span style="font-size:28px">Write New
+                Article</span></span></strong></em></h1>
+            <form action="/a/write-article" class="py-1" method="post" th:object="${article}">
+            
+                <div class="row py-1">
+                    <div class="col">
+                        <input type="text" id="articleName" placeholder="article name" class="form-control" th:field="*{name}">
+                    </div>
+                    <div class="col">
+                        <input type="text" id="slug" placeholder="article-slug" class="form-control" th:field="*{slug}">
+                    </div>
+                    <div class="col">
+                        <input type="text" id="writerid" placeholder="writer id" class="form-control" th:field="*{writer.id}">
+                    </div>
+                </div>
+                <br>
+                <textarea class="d-none" name="" id="contentText" cols="30" rows="10" th:field="*{content}"></textarea>
+                <textarea name="editor" id="editor1"></textarea>
+                <button class="form-control btn btn-primary my-1 btn-sm" type="submit">Add</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        document.querySelector("#articleName").addEventListener("change", function (e) {
+            const enteredArticleName = e.target.value;
+            var slug = enteredArticleName.toLowerCase().split(' ').join('-');
+            if(slug.startsWith("-") || slug.endsWith("-")){
+               alert("remove extra spaces")
+            }
+            else{
+                document.getElementById("slug").value = slug;
+            }
+            console.log(enteredTopicName);
+        });
+
+        var editor = CKEDITOR.replace('editor1');
+
+// The "change" event is fired whenever a change is made in the editor.
+editor.on('change', function (evt) {
+    // getData() returns CKEditor's HTML content.
+    document.getElementById("contentText").innerText = evt.editor.getData();
+    console.log(evt.editor.getData());
+});
+    </script>
+</body>
+</html>

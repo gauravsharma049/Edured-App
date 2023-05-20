@@ -7,7 +7,7 @@
     
 }
 .index-table{
-    width: 30%;
+    width: 22%;
 }
 .index-table-content{
     height: max-content;
@@ -83,11 +83,25 @@
     background-color: #282739;
     border: 1px solid #cccccc;
     padding: 10px 15px;
-    color: green;
+    color: #23ce6b;
     border-radius: 10px;
     /* color: white; */
     overflow-x: auto;
 
+}
+
+/* .card-footer{
+    display: none;
+} */
+.commentReply{
+    display: none;
+}
+.fake-textarea{
+    resize: vertical;
+    overflow: auto;
+}
+.like, .reply-btn, .share{
+    cursor: pointer;
 }
 
 @media screen and (max-width:1024px) {
@@ -112,6 +126,9 @@
         width: 50px;
         height: 30px;
     }
+    .ad-right{
+        display: none;
+    }
 }
 @media screen and (max-width: 600px) {
     .newLessonIndex{
@@ -119,7 +136,7 @@
         width: 50%;
     }
    .course-content{
-    padding: 0;
+    /* padding: 0; */
     margin-top: 40px;
    }
 }

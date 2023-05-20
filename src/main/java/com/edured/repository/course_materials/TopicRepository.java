@@ -10,4 +10,6 @@ public interface TopicRepository extends JpaRepository<Topic, Long> {
     public List<Topic> findByLessonId(long id);
     public Topic findBySlug(String slug);
     public List<Topic> findByLessonSlug(String slug);
+
+    List<Topic> findByContentContaining(String content);
 }

@@ -1,19 +1,20 @@
 package com.edured.model.course_materials;
 
-
-import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
+import com.edured.model.users.EduredUser;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.util.List;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
-public class Topic {
+public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -24,10 +25,7 @@ public class Topic {
     private String slug;
     private String dateOfCreation;
     private String lastUpdatedDate;
-//    @JsonIgnore
-    @JsonBackReference
+
     @ManyToOne
-    private Lesson lesson;
-    @OneToMany(mappedBy ="topic", cascade = CascadeType.ALL)
-    private List<Comment> comments;
+    private EduredUser writer;
 }

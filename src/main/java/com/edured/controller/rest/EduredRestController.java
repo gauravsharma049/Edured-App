@@ -1,13 +1,9 @@
 package com.edured.controller.rest;
 
-import com.edured.model.course_materials.Course;
-import com.edured.model.course_materials.Lesson;
-import com.edured.model.course_materials.Topic;
+import com.edured.model.course_materials.*;
 import com.edured.model.users.Student;
 import com.edured.model.users.Teacher;
-import com.edured.services.course_materials.CourseServices;
-import com.edured.services.course_materials.LessonServices;
-import com.edured.services.course_materials.TopicServices;
+import com.edured.services.course_materials.*;
 import com.edured.services.users.StudentService;
 import com.edured.services.users.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +26,11 @@ public class EduredRestController {
     LessonServices lessonService;
     @Autowired
     BCryptPasswordEncoder passwordEncoder;
+
+    @Autowired
+    CommentService commentService;
+    @Autowired
+    ArticleService articleService;
 
     @GetMapping("/welcome")
     public String welcome(){
@@ -81,6 +82,22 @@ public class EduredRestController {
     @PostMapping("/topic")
     public Topic addTopic(@RequestBody Topic topic){
         return  topicService.addTopic(topic);
+    }
+    @GetMapping("/article")
+    public List<Article> getArticles(){
+        return articleService.getAllArticles();
+    }
+    @PostMapping("/article")
+    public Article addArticle(@RequestBody Article article){
+        return articleService.addArticle(article);
+    }
+    @GetMapping("/comment")
+    public List<Comment> getComments(){
+        return commentService.getAllComments();
+    }
+    @PostMapping("/comment")
+    public Comment addComment(@RequestBody Comment comment){
+        return commentService.addComment(comment);
     }
     @GetMapping("/lesson")
     public List<Lesson> getAllLesson(){

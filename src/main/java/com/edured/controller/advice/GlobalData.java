@@ -20,6 +20,7 @@ public class GlobalData {
             String userName = principal.getName();
             System.out.println("USERNAME: " + userName);
             model.addAttribute("loggedinuser", userService.getUserByEmail(userName));
+
         }
         catch(Exception e){
 //            model.addAttribute("student", new Student());

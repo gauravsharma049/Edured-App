@@ -1,9 +1,11 @@
 package com.edured.home;
 
+import com.edured.model.course_materials.Article;
 import com.edured.model.course_materials.Course;
 import com.edured.model.course_materials.Lesson;
 import com.edured.model.course_materials.Topic;
 import com.edured.services.course_materials.CourseServices;
+import com.edured.services.course_materials.SearchResultService;
 import com.edured.services.users.EduredUserService;
 import com.edured.services.users.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +13,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class HomeController {
@@ -22,13 +31,40 @@ public class HomeController {
     CourseServices courseService;
     @Autowired
     TeacherService teacherService;
+    @Autowired
+    SearchResultService searchResultService;
     @GetMapping("/")
     public String home(Model model){
         model.addAttribute("courses", courseService.getAllCourses());
 //        System.out.println(courseService.getAllCourses());
         return "index";
     }
+    @GetMapping("/searchResults")
+    public String searchResults(HttpServletRequest request, Model model){
+        String keyword = request.getParameter("search");
+        System.out.println(keyword);
+        if(keyword !=null){
+            List<Article> articles = searchResultService.searchArticle(keyword);
+            List<Course> courses = searchResultService.searchCourse(keyword);
+            List<Topic> topics = searchResultService.searchTutorial(keyword);
+            Map<String, List<?>> results = new HashMap<>();
+            results.put("articles", articles);
+            results.put("courses", courses);
+            results.put("tutorials", topics);
 
+            for(Article article : articles){
+                String content = article.getContent().substring(0, Math.min(article.getContent().length(), 500))+"...";
+                article.setContent(content);
+            }
+            model.addAttribute("results", articles);
+            model.addAttribute("allResult", results);
+            return "SearchResults";
+        }
+        else {
+            return "notfound";
+        }
+
+    }
     @GetMapping("/lessons")
     public String lessons(Model model){
         model.addAttribute("title", "Lessons");
