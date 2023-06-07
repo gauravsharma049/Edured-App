@@ -33,4 +33,5 @@ public class AdminController {
         admin.getUser().setPassword(passwordEncoder.encode(admin.getUser().getPassword()));
         return  adminService.addAdmin(admin);
     }
+    
 }
