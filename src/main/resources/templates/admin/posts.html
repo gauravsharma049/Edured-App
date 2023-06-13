@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="admin/base::layout(~{:: .content})">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="content mt-4">
+        <link th:href="@{/edured-admin/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
+        <div th:if="${success}" class="text-center alert alert-custom-success">
+            <span th:text="${success}"></span>
+        </div>
+        <div th:if="${failed}" class="mt-1 text-center alert alert-custom-danger">
+            <span th:text="${failed}"></span>
+        </div>
+        <div class="card text-center">
+            <div class="card-header border-bottom-0">
+                <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active-btn" aria-current="true" href="#">Articles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Courses/Lessons</a>
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-header d-flex justify-content-between">
+                <ul id="articlesTable" class="nav nav-tabs card-header-tabs">
+                    <li id="published" class="nav-item">
+                        <a id="publishedLink" class="nav-link active" aria-current="true" href="#published">Published <span
+                                class="badge bg-info-dark rounded-pill text-white">&nbsp;<span
+                                    th:text="${articleCount.publishedArticle}"></span>&nbsp;</span></a>
+                    </li>
+                    <li id="pending" class="nav-item">
+                        <a id="pendingLink" class="nav-link" href="#pending">Pending <span
+                                class="badge bg-info-dark rounded-pill text-white">&nbsp;<span
+                                    th:text="${articleCount.pendingArticle}"></span>&nbsp;</span></a>
+                    </li>
+                    <li id="trashed" class="nav-item">
+                        <a id="deletedLink" href="#trashed" class="nav-link">Trashed <span
+                                class="badge bg-info-dark rounded-pill text-white">&nbsp;<span
+                                    th:text="${articleCount.deletedArticle}"></span>&nbsp;</span></a>
+                    </li>
+                </ul>
+                <a th:href="@{/a/write-article}" class="d-sm-inline-block btn btn-sm btn-info-dark shadow-sm"><i
+                    class="fas fa-plus-square fa-sm text-white-50"></i> Add New</a>
+            </div>
+            <div class="card-body">
+                <div id="publishedArticles" class="table-responsive">
+                    <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="dataTables_length" id="dataTable_length"><label>Show <select
+                                            name="dataTable_length" aria-controls="dataTable"
+                                            class="custom-select custom-select-sm form-control form-control-sm">
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                        </select> entries</label></div>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div id="dataTable_filter" class="dataTables_filter"><label>Search:<input type="search"
+                                            class="form-control form-control-sm" placeholder=""
+                                            aria-controls="dataTable"></label></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table class="table table-bordered dataTable" id="dataTable" width="100%"
+                                    cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                                    <thead>
+                                        <tr role="row">
+                                            <th>Name</th>
+                                            <th>Content</th>
+                                            <th>Slug</th>
+                                            <th>Writer</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <span>
+                                            <tr th:each="article : ${articles}">
+                                                <td th:text="${article.name}"></td>
+                                                <td th:text="${article.content}"></td>
+                                                <td th:text="${article.slug}"></td>
+                                                <td th:text="${article.writer.name}"></td>
+                                                <td>
+                                                    <div class="d-flex  text-success justify-content-between">
+                                                        <span>Published&nbsp;</span><i class="fas fa-check pt-1"></i>
+                                                    </div>
+                                                </td>
+
+                                                <td><a th:href="@{/a/{slug}(slug=${article.slug})}" title="view"
+                                                        target="_blank" class="btn btn-warning btn-circle btn-sm">
+                                                        <!-- <i class="fas fa-info-circle"></i> -->
+                                                        <i class="fas fa-eye"></i>
+                                                    </a>
+                                                    <a class="btn btn-danger btn-circle btn-sm" title="delete" href="#"
+                                                        data-toggle="modal" data-target="#deleteModal">
+                                                        <i class="fas fa-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </span>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div id="pendingArticles" class="table-responsive">
+                    <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="dataTables_length" id="dataTable_length"><label>Show <select
+                                            name="dataTable_length" aria-controls="dataTable"
+                                            class="custom-select custom-select-sm form-control form-control-sm">
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                        </select> entries</label></div>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div id="dataTable_filter" class="dataTables_filter"><label>Search:<input type="search"
+                                            class="form-control form-control-sm" placeholder=""
+                                            aria-controls="dataTable"></label></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table class="table table-bordered dataTable" id="dataTable" width="100%"
+                                    cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                                    <thead>
+                                        <tr role="row">
+                                            <th>Name</th>
+                                            <th>Content</th>
+                                            <th>Slug</th>
+                                            <th>Writer</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <span>
+                                            <tr th:each="article : ${pendingArticles}">
+                                                <td th:text="${article.name}"></td>
+                                                <td th:text="${article.content}"></td>
+                                                <td th:text="${article.slug}"></td>
+                                                <td th:text="${article.writer.name}"></td>
+                                                <td>
+                                                    <div class="d-flex  text-warning justify-content-between">
+                                                        <span>Pending&nbsp;</span><i class="fas fa-clock pt-1"></i>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <a th:href="@{/home/pending/{slug}(slug=${article.slug})}"
+                                                            title="view" style="font-size: 15px;" target="_blank"
+                                                            class="btn btn-warning btn-circle btn-sm">
+                                                            <!-- <i class="fas fa-info-circle"></i> -->
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>&nbsp;
+                                                        <span  th:if="${loggedinuser != 'anonymous'}">
+                                                            <a th:if="${loggedinuser.role == 'ROLE_ADMIN'}" class="btn btn-success btn-circle btn-sm" title="approve"
+                                                            style="font-size: 20px;" href="#" data-toggle="modal"
+                                                            th:data-target="'#approveArticle'+${article.id}">
+                                                            <i class="fas fa-check-circle"></i>
+                                                        </a>
+                                                        </span>
+                                                        &nbsp;
+                                                        <a class="btn btn-danger btn-circle btn-sm" href="#"
+                                                            data-toggle="modal" data-target="#deleteModal"
+                                                            title="delete">
+                                                            <i class="fas fa-trash"></i>
+                                                        </a>
+                                                        <!-- Approve Modal-->
+                                                        <div class="modal fade" th:id="'approveArticle'+${article.id}" tabindex="-1"
+                                                            role="dialog" aria-labelledby="exampleModalLabel"
+                                                            aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel1">
+                                                                            Approve Article?</h5>
+                                                                        <button class="close" type="button"
+                                                                            data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">×</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">Select "Approve" below if you
+                                                                        are want to approve this article.
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button class="btn btn-secondary" type="button"
+                                                                            data-dismiss="modal">Cancel
+                                                                        </button>
+                                                                        <a class="btn btn-primary"
+                                                                            th:href="@{/home/approve/article/{slug} (slug = ${article.slug})}">Approve</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </span>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div id="deletedArticles" class="table-responsive">
+                    <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="dataTables_length" id="dataTable_length"><label>Show <select
+                                            name="dataTable_length" aria-controls="dataTable"
+                                            class="custom-select custom-select-sm form-control form-control-sm">
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                        </select> entries</label></div>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div id="dataTable_filter" class="dataTables_filter"><label>Search:<input type="search"
+                                            class="form-control form-control-sm" placeholder=""
+                                            aria-controls="dataTable"></label></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table class="table table-bordered dataTable" id="dataTable" width="100%"
+                                    cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                                    <thead>
+                                        <tr role="row">
+                                            <th>Name</th>
+                                            <th>Content</th>
+                                            <th>Slug</th>
+                                            <th>Writer</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <span>
+                                            <tr th:each="article : ${deletedArticles}">
+                                                <td th:text="${article.name}"></td>
+                                                <td th:text="${article.content}"></td>
+                                                <td th:text="${article.slug}"></td>
+                                                <td th:text="${article.writer.name}"></td>
+                                                <td>
+                                                    <div class="d-flex  text-warning justify-content-between">
+                                                        <span>Pending&nbsp;</span><i class="fas fa-clock pt-1"></i>
+                                                    </div>
+                                                </td>
+                                                <td><a th:href="@{/}" title="view"
+                                                        class="btn btn-warning btn-circle btn-sm">
+                                                        <!-- <i class="fas fa-info-circle"></i> -->
+                                                        <i class="fas fa-eye"></i>
+                                                    </a>
+                                                    <a class="btn btn-danger btn-circle btn-sm" href="#"
+                                                        data-toggle="modal" title="delete permanently"
+                                                        data-target="#deleteModal">
+                                                        <i class="fas fa-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </span>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            const navLinks = document.querySelector('#articlesTable').querySelectorAll('.nav-link');
+            
+
+
+            var publicshedArticles = document.querySelector("#publishedArticles");
+            var pendingArticles = document.querySelector("#pendingArticles");
+            var deletedArticles = document.querySelector("#deletedArticles");
+
+            pendingArticles.style.display = 'none';
+            deletedArticles.style.display = 'none';
+
+
+            navLinks.forEach(navLink => {
+                navLink.addEventListener('click', function () {
+                    // Remove active class from all nav links
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                    });
+
+                    // Add active class to clicked nav link
+                    this.classList.add('active');
+                    console.log(this.id)
+                    // Set display style for courses, articles, and tutorials
+                    publicshedArticles.style.display = this.id == 'publishedLink' ? "block" : "none";
+                    pendingArticles.style.display = this.id == 'pendingLink' ? "block" : "none";
+                    deletedArticles.style.display = this.id == 'deletedLink' ? "block" : "none";
+
+                });
+            });
+            if(document.URL.endsWith("published")){
+                document.getElementById("publishedLink").click();
+            }
+            if(document.URL.endsWith("pending")){
+                document.getElementById("pendingLink").click();
+            }
+            if(document.URL.endsWith("trashed")){
+                document.getElementById("deletedLink").click();
+            }
+        </script>
+        <!-- Page level plugins -->
+        <script th:src="@{/edured-admin/vendor/datatables/jquery.dataTables.min.js}"></script>
+        <script th:src="@{/edured-admin/vendor/datatables/dataTables.bootstrap4.min.js}"></script>
+
+        <!-- Page level custom scripts -->
+        <script th:src="@{/edured-admin/js/demo/datatables-demo.js}"></script>
+    </div>
+</body>
+
+</html>

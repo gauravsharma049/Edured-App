@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="admin/base::layout(~{:: .content})">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="content mt-4">
+        <link th:href="@{/edured-admin/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
+        <!-- Page Heading -->
+
+        <!-- <script>
+            var doc = document.querySelector('.container-fluid')
+            var doc2 = document.querySelector('.content-nav');
+            var doc3 = document.querySelector('#content');
+            doc3.insertBefore(doc2, doc);
+            console.log(doc)
+        </script> -->
+        <div th:if="${loggedinuser.role} == 'ROLE_ADMIN'">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-info-dark">Admins</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="dataTables_length" id="dataTable_length"><label>Show <select
+                                                name="dataTable_length" aria-controls="dataTable"
+                                                class="custom-select custom-select-sm form-control form-control-sm">
+                                                <option value="10">10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
+                                            </select> entries</label></div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div id="dataTable_filter" class="dataTables_filter"><label>Search:<input type="search"
+                                                class="form-control form-control-sm" placeholder=""
+                                                aria-controls="dataTable"></label></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-bordered dataTable" id="dataTable" width="100%"
+                                        cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                                        <thead>
+                                            <tr role="row">
+                                                <th>Name</th>
+                                                <th>Email</th>
+                                                <th>Username</th>
+                                                <th>Role</th>
+                                                <th>Registered Date</th>
+                                            </tr>
+                                        </thead>
+    
+                                        <tbody>
+                                            <tr th:each="user : ${users}">
+                                                <span th:if="${user.role} == 'ROLE_ADMIN'">
+                                                    <td th:text="${user.name}"></td>
+                                                    <td th:text="${user.email}"></td>
+                                                    <td th:text="${user.username}"></td>
+                                                    <td th:text="${#strings.substring(user.role, 5)}"></td>
+                                                    <td th:text="${user.registeredDate}"></td>
+                                                </span>
+    
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-info-dark">Teachers</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="dataTables_length" id="dataTable_length"><label>Show <select
+                                                name="dataTable_length" aria-controls="dataTable"
+                                                class="custom-select custom-select-sm form-control form-control-sm">
+                                                <option value="10">10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
+                                            </select> entries</label></div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div id="dataTable_filter" class="dataTables_filter"><label>Search:<input type="search"
+                                                class="form-control form-control-sm" placeholder=""
+                                                aria-controls="dataTable"></label></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-bordered dataTable" id="dataTable" width="100%"
+                                        cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                                        <thead>
+                                            <tr role="row">
+                                                <th>Name</th>
+                                                <th>Email</th>
+                                                <th>Username</th>
+                                                <th>Role</th>
+                                                <th>Registered Date</th>
+                                            </tr>
+                                        </thead>
+    
+                                        <tbody>
+                                            <tr th:each="user : ${users}">
+                                                <span th:if="${user.role} == 'ROLE_TEACHER'">
+                                                    <td th:text="${user.name}"></td>
+                                                    <td th:text="${user.email}"></td>
+                                                    <td th:text="${user.username}"></td>
+                                                    <td th:text="${#strings.substring(user.role, 5)}"></td>
+                                                    <td th:text="${user.registeredDate}"></td>
+                                                </span>
+    
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-info-dark">Writers</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="dataTables_length" id="dataTable_length"><label>Show <select
+                                                name="dataTable_length" aria-controls="dataTable"
+                                                class="custom-select custom-select-sm form-control form-control-sm">
+                                                <option value="10">10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
+                                            </select> entries</label></div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div id="dataTable_filter" class="dataTables_filter"><label>Search:<input type="search"
+                                                class="form-control form-control-sm" placeholder=""
+                                                aria-controls="dataTable"></label></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-bordered dataTable" id="dataTable" width="100%"
+                                        cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                                        <thead>
+                                            <tr role="row">
+                                                <th>Name</th>
+                                                <th>Email</th>
+                                                <th>Username</th>
+                                                <th>Role</th>
+                                                <th>Registered Date</th>
+                                            </tr>
+                                        </thead>
+    
+                                        <tbody>
+                                            <tr th:each="user : ${users}">
+                                                <span th:if="${user.role} == 'ROLE_WRITER'">
+                                                    <td th:text="${user.name}"></td>
+                                                    <td th:text="${user.email}"></td>
+                                                    <td th:text="${user.username}"></td>
+                                                    <td th:text="${#strings.substring(user.role, 5)}"></td>
+                                                    <td th:text="${user.registeredDate}"></td>
+                                                </span>
+    
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-info-dark">Students</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="dataTables_length" id="dataTable_length"><label>Show <select
+                                                name="dataTable_length" aria-controls="dataTable"
+                                                class="custom-select custom-select-sm form-control form-control-sm">
+                                                <option value="10">10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
+                                            </select> entries</label></div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div id="dataTable_filter" class="dataTables_filter"><label>Search:<input type="search"
+                                                class="form-control form-control-sm" placeholder=""
+                                                aria-controls="dataTable"></label></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-bordered dataTable" id="dataTable" width="100%"
+                                        cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                                        <thead>
+                                            <tr role="row">
+                                                <th>Name</th>
+                                                <th>Email</th>
+                                                <th>Username</th>
+                                                <th>Role</th>
+                                                <th>Registered Date</th>
+                                            </tr>
+                                        </thead>
+    
+                                        <tbody>
+                                            <tr th:each="user : ${users}">
+                                                <span th:if="${user.role} == 'ROLE_STUDENT'">
+                                                    <td th:text="${user.name}"></td>
+                                                    <td th:text="${user.email}"></td>
+                                                    <td th:text="${user.username}"></td>
+                                                    <td th:text="${#strings.substring(user.role, 5)}"></td>
+                                                    <td th:text="${user.registeredDate}"></td>
+                                                </span>
+    
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page level plugins -->
+        <script th:src="@{/edured-admin/vendor/datatables/jquery.dataTables.min.js}"></script>
+        <script th:src="@{/edured-admin/vendor/datatables/dataTables.bootstrap4.min.js}"></script>
+
+        <!-- Page level custom scripts -->
+        <script th:src="@{/edured-admin/js/demo/datatables-demo.js}"></script>
+    </div>
+</body>
+
+</html>

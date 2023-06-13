@@ -17,7 +17,7 @@
 
 <body>
     <div class="content">
-        
+
 
 
         <div class="container cover mb-3">
@@ -26,7 +26,8 @@
                     <div class="row p-1">
 
                         <div class="col-5">
-                            <div class="bg-white overflow-hidden p-0" style="border-radius: 50%; height: 105px; width: 105px;">
+                            <div class="bg-white overflow-hidden p-0"
+                                style="border-radius: 50%; height: 105px; width: 105px;">
                                 <img style="width: 100%;" th:src="@{/img/static_img/anonymoususer.jpg}" alt="">
                             </div>
                         </div>
@@ -40,9 +41,12 @@
                     <div class="row p-1">
                         <div style="line-height: 1;">
                             <div class="d-flex justify-content-between">
-                                <span class="text-uppercase" style="font-size: 20px; font-weight: 500; font-family: fantasy" th:text="${userdetail.name}">gaurav sharma</span>
+                                <span class="text-uppercase"
+                                    style="font-size: 20px; font-weight: 500; font-family: fantasy"
+                                    th:text="${userdetail.name}">gaurav sharma</span>
                                 <div>
-                                    <span style="color: #32812d;"><i class="far fa-star"></i></span> <span class="prosubscription">PRO</span>
+                                    <span style="color: #32812d;"><i class="far fa-star"></i></span> <span
+                                        class="prosubscription">PRO</span>
                                 </div>
                             </div>
                             <span th:text="${userdetail.username}"></span>
@@ -87,24 +91,29 @@
                             <li class="mb-3">
                                 <div style="font-size: 14px;">
                                     <span style="font-family: cursive;">More about me</span><br>
-                                    <span style="font-weight: 600;">abc@gmail.com  @username</span>
+                                    <span style="font-weight: 600;">abc@gmail.com @username</span>
                                 </div>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-md-7">
-                    
+
                     <div th:if="${loggedinuser != 'anonymous'}">
                         <div th:if="${loggedinuser.role == 'ROLE_TEACHER'}">
                             <!-- Button trigger modal -->
                             <div class="px-3 py-4 mb-4 border rounded bg-dark bg-opacity-25 d-flex justify-content-between">
-                            <button data-bs-toggle="modal" data-bs-target="#exampleModal1">Add New Course</button>
-                            <button data-bs-toggle="modal" data-bs-target="#exampleModal2">Add New Lesson</button>
-                            <a href="/teacher/write-tutorial"><button>Add New Topic</button></a>
-                            <a href="/a/write-article"><button>Write Article</button></a>
-                        </div>
-            
+                                <a th:href="@{/home/dashboard}" class="d-sm-inline-block btn btn-sm btn-success shadow-sm"><span class="pe-2">Go to dashboard</span><i
+                                    class="fas fa-arrow-right fa-sm text-white"></i></a>
+                            </div>
+                            <!-- Button trigger modal -->
+                            <div class="px-3 py-4 mb-4 border rounded bg-dark bg-opacity-25 d-flex justify-content-between">
+                                <button data-bs-toggle="modal" data-bs-target="#exampleModal1">Add New Course</button>
+                                <button data-bs-toggle="modal" data-bs-target="#exampleModal2">Add New Lesson</button>
+                                <a href="/teacher/write-tutorial"><button>Add New Topic</button></a>
+                                <a href="/a/write-article"><button>Write Article</button></a>
+                            </div>
+
                             <!-- Modal -->
                             <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel"
                                 aria-hidden="true">
@@ -127,7 +136,8 @@
                                                 <input type="text" placeholder="course-slug" th:field="*{slug}">
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
                                             <button type="submit" class="btn btn-primary">Save changes</button>
                                         </div>
                                         </form>
@@ -156,7 +166,8 @@
                                                 <input type="text" placeholder="lesson-slug" th:field="*{slug}">
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
                                             <button type="submit" class="btn btn-primary">Save changes</button>
                                         </div>
                                         </form>
@@ -179,7 +190,8 @@
                             </div>
                             <div class="mt-4 pt-1">
                                 <div class="progress" style="height: 12px;">
-                                    <div class="progress-bar overflow-visible" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                                    <div class="progress-bar overflow-visible" role="progressbar" style="width: 25%;"
+                                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
                                 </div>
                             </div>
                         </div>
@@ -188,7 +200,8 @@
 
                     <div class="ps-3 py-4 mb-4 border rounded bg-dark bg-opacity-25">
                         <div>
-                            <p class="mb-2" style="font-size: 20px; font-weight: 600;">Certifications and Badges. . .</p>
+                            <p class="mb-2" style="font-size: 20px; font-weight: 600;">Certifications and Badges. . .
+                            </p>
                         </div>
                         <div class="d-inline-block" style="height: 120px;">
                             <div class="hex">
@@ -199,7 +212,8 @@
                             </div>
                             <div class="mt-4 pt-1">
                                 <div class="progress" style="height: 12px;">
-                                    <div class="progress-bar overflow-visible" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                                    <div class="progress-bar overflow-visible" role="progressbar" style="width: 25%;"
+                                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
                                 </div>
                             </div>
                         </div>

@@ -17,4 +17,7 @@ public class EduredUserService {
         return userRepository.findByRole(role);
     }
     public EduredUser getUserByEmail(String email){return userRepository.findByEmail(email);}
+    public List<EduredUser> getAllUsers(){
+        return userRepository.findAll();
+    }
 }

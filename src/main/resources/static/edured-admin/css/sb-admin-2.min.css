@@ -7103,12 +7103,42 @@ button.bg-light:hover {
 .bg-content{
     background-color: #b8dde3 !important;
 }
+.active-btn{
+    border-bottom: none !important;
+    color: #6e707e !important;
+    background-color: #fff !important;
+    border: 1px solid;
+    border-color: #dddfeb #dddfeb #fff !important;
+    border-radius: 3px;
+}
+.alert-custom-success{
+    color: #ffffff !important;
+    background-color: #4c987d !important;
+    border-color: #bff0de !important;
+}
+.alert-custom-danger{
+    color: #ffffff !important;
+    background-color: #e55b4d !important;
+    border-color: #f8ccc8 !important;
+}
 .bg-sidebar{
     background-color: #006270 !important;
+}
+.bg-info-dark{
+    background-color: #006270 !important;
+}
+.text-info-dark{
+    color: #006270 !important;
+}
+.btn-info-dark{
+    background-color: #006270 !important;
+    color: white !important;
+    border-color: #006270 !important;
 }
 .bg-top-nav{
     background-color: #16c8e5 !important;
 }
+
 
 a.bg-dark:focus,
 a.bg-dark:hover,

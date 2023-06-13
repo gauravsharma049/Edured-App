@@ -1,22 +1,25 @@
 package com.edured.controller;
 
+import java.security.Principal;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.edured.home.LoggedInUserInfo;
 import com.edured.model.course_materials.Comment;
-import com.edured.model.course_materials.Course;
 import com.edured.model.course_materials.Lesson;
 import com.edured.model.course_materials.Topic;
 import com.edured.services.course_materials.CommentService;
 import com.edured.services.course_materials.CourseServices;
-import com.edured.services.course_materials.LessonServices;
 import com.edured.services.course_materials.TopicServices;
-import com.edured.services.users.TeacherService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
-import java.security.Principal;
 
 @Controller
 @RequestMapping("/t")

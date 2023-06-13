@@ -1,13 +1,18 @@
 package com.edured.model.course_materials;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
 import com.edured.model.users.EduredUser;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.persistence.*;
-import java.util.List;
 
 @Getter
 @Setter
@@ -25,7 +30,8 @@ public class Article {
     private String slug;
     private String dateOfCreation;
     private String lastUpdatedDate;
-
+    private boolean status;
+    private boolean deleted;
     @ManyToOne
     private EduredUser writer;
 }

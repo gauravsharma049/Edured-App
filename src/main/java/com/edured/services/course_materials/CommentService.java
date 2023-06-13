@@ -1,18 +1,16 @@
 package com.edured.services.course_materials;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.edured.home.LoggedInUserInfo;
 import com.edured.model.course_materials.Comment;
 import com.edured.repository.course_materials.CommentRepository;
 import com.edured.repository.users.EduredUserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.security.Principal;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.List;
 
 @Service
 public class CommentService {

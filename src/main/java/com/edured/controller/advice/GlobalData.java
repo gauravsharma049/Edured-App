@@ -1,7 +1,6 @@
 package com.edured.controller.advice;
 
 import com.edured.model.users.Student;
-import com.edured.model.users.Teacher;
 import com.edured.services.users.EduredUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -27,6 +26,7 @@ public class GlobalData {
         catch(Exception e){
 //            model.addAttribute("student", new Student());
             model.addAttribute("loggedinuser", "anonymous");
+            model.addAttribute("adminSize", userService.getUserByRole("ROLE_ADMIN").size());
         }
 
     }

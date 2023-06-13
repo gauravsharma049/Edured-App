@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::head}, ~{:: .content}, ~{::script})">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title th:text="${title}"></title>
+    <link rel="stylesheet" th:href="@{/css/parts/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="content pt-0">
+        <!-- <form th:action="@{/teacher-signup}" th:object="${teacher}" class="form-signup" method="post">
+            <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign Up</h1>
+            <div class="social-login d-flex justify-content-between">
+                <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f p-2 bg-white rounded-2" style="color: #3C589C;"></i> Sign up with Facebook</span>
+                </button>
+                <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google p-2 rounded-2" style="background-color: #9e8f8f;"></i> Sign up with Google</span>
+                </button>
+            </div>
+    
+            <p style="text-align:center">OR</p>
+    
+            <input type="text" id="username" class="form-control" placeholder="Username" required="" name="username" autofocus="" th:field="*{user.email}">
+            <input type="text" id="name" name="name" class="form-control" placeholder="Name" required autofocus="" th:field="*{user.name}">
+            <input type="password" id="password" name="password" class="form-control" placeholder="Password" required autofocus="" autocomplete="off" th:field="*{user.password}">
+            <input type="password" id="user-repeatpass" class="form-control" placeholder="Repeat Password" required autofocus="" autocomplete="off">
+    
+            <button class="btn btn-primary btn-block" type="submit"><i class="fas fa-user-plus"></i> Sign Up</button>
+            <a href="#" id="cancel_signup"><i class="fas fa-angle-left"></i> Back</a>
+        </form> -->
+        <section class="bg-image"
+  style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-5">
+              <h2 class="text-uppercase text-center mb-5">Sign Up as a Teacher</h2>
+
+              <form th:action="@{/admin-signup}" th:object="${admin}" method="post">
+
+                <div class="form-outline mb-4">
+                  <input type="text" id="name" placeholder="Your name" class="form-control form-control-lg" th:field="*{user.name}" />
+                </div>
+
+                <div class="form-outline mb-4">
+                  <input type="email" id="username" placeholder="your email" class="form-control form-control-lg" th:field="*{user.email}" />
+                </div>
+
+                <div class="form-outline mb-4">
+                  <input type="password" id="password" placeholder="password" class="form-control form-control-lg" th:field="*{user.password}" />
+                </div>
+
+                <div class="form-outline mb-4">
+                  <input type="password" placeholder="repeat-password" id="form3Example4cdg" class="form-control form-control-lg" />
+                </div>
+
+                <div class="form-check d-flex justify-content-center mb-5">
+                  <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" />
+                  <label class="form-check-label" for="form2Example3g">
+                    I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>
+                  </label>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                  <button type="submit"
+                    class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
+                </div>
+
+                <p class="text-center text-muted mt-5 mb-0">Have already an account? <a role="button" data-bs-toggle="modal" data-bs-target="#loginSignUpModal"
+                    class="fw-bold text-body nav-link"><u>Login here</u></a></p>
+
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+    </div>
+    <script>console.log(window.location.search.substring(8));</script>
+</body>
+</html>

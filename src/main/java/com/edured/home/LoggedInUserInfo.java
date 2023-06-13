@@ -1,13 +1,12 @@
 package com.edured.home;
 
-import com.edured.model.users.EduredUser;
-import com.edured.model.users.Student;
-import com.edured.services.users.EduredUserService;
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
-import java.security.Principal;
+import com.edured.model.users.EduredUser;
+import com.edured.services.users.EduredUserService;
 
 @Service
 public class LoggedInUserInfo {

@@ -18,6 +18,15 @@
     <div class="content pt-0">
         
         <div class="px-3">
+            <div class="bg-light mt-4 mb-2">
+                <div th:if="${success}" class="text-center text-white alert bg-success">
+                    <span th:text="${success}"></span>
+                    
+                </div>
+                <div th:if="${failed}" class="mt-1 text-center alert alert-danger">
+                    <span th:text="${failed}"></span>
+                </div>
+            </div>
             <h1><em><strong><span style="font-family:Comic Sans MS,cursive"><span style="font-size:28px">Write New
                 Article</span></span></strong></em></h1>
             <form action="/a/write-article" class="py-1" method="post" th:object="${article}">
