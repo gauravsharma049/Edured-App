@@ -137,22 +137,23 @@ public class AdminPageController {
         return "admin/posts.html";
     }
 
-    @GetMapping("/delete/{email}")
-    public String deleteUser(@PathVariable("email") String email, RedirectAttributes attributes, Principal principal) {
+    @GetMapping("/delete/{id}")
+    public String deleteUser(@PathVariable("id") long id, RedirectAttributes attributes, Principal principal) {
         try {
             String username = principal.getName();
             if (userService.getUserByEmail(username).getRole().equals("ROLE_ADMIN")) {
-                String userRole = userService.getUserByEmail(email).getRole();
+                EduredUser user = userService.getUserById(id);
+                String userRole = user.getRole();
 
                 if (userRole.equals("ROLE_TEACHER")) {
-                    articleService.deleteArticlesOfUser(email);
+                    articleService.deleteArticlesOfUser(user.getEmail());
                     teacherService.deleteTeacher(
-                            teacherService.findByUserId(userService.getUserByEmail(email).getId()).getId());
-                    attributes.addFlashAttribute("success", "Successfully deleted user "+ email+"!!");
+                            teacherService.findByUserId(id).getId());
+                    attributes.addFlashAttribute("success", "Successfully deleted user "+ user.getEmail()+"!!");
                 } else if (userRole.equals("ROLE_STUDENT")) {
                     studentService.deleteStudent(
-                            studentService.findByUserId(userService.getUserByEmail(email).getId()).getStudentId());
-                    attributes.addFlashAttribute("success", "Successfully deleted user "+ email+"!!");
+                            studentService.findByUserId(id).getStudentId());
+                    attributes.addFlashAttribute("success", "Successfully deleted user "+ user.getEmail()+"!!");
                 }
             }
             else{
