@@ -5,6 +5,7 @@ import com.edured.repository.users.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -13,6 +14,7 @@ public class StudentService {
     StudentRepository studentRepository;
 
     public Student addStudent(Student student){
+        student.getUser().setRegisteredDate(new Date().toString());
         return studentRepository.save(student);
     }
 

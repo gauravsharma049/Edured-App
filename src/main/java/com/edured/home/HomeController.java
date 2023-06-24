@@ -34,9 +34,11 @@ public class HomeController {
     @GetMapping("/")
     public String home(Model model){
         model.addAttribute("courses", courseService.getAllCourses());
+        model.addAttribute("title", "Edured - learn tutorials and earn knowledge for free!");
 //        System.out.println(courseService.getAllCourses());
         return "index";
     }
+    
     @GetMapping("/searchResults")
     public String searchResults(HttpServletRequest request, Model model){
         String keyword = request.getParameter("search");

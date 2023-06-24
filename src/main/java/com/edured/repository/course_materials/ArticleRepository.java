@@ -12,4 +12,5 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
     public List<Article> findByDeleted(boolean b);
     public List<Article> findByStatusAndWriterUsername(boolean b, String username);
     public List<Article> findByDeletedAndWriterUsername(boolean b, String username);
+    public List<Article> findByWriterUsername(String username);
 }

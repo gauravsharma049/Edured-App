@@ -11,15 +11,13 @@
 <body>
     <div class="content mt-4">
         <link th:href="@{/edured-admin/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
-        <!-- Page Heading -->
-
-        <!-- <script>
-            var doc = document.querySelector('.container-fluid')
-            var doc2 = document.querySelector('.content-nav');
-            var doc3 = document.querySelector('#content');
-            doc3.insertBefore(doc2, doc);
-            console.log(doc)
-        </script> -->
+        <div th:if="${success}" class="text-center alert alert-custom-success">
+            <span th:text="${success}"></span>
+        </div>
+        <div th:if="${failed}" class="mt-1 text-center alert alert-custom-danger">
+            <span th:text="${failed}"></span>
+        </div>
+        
         <div th:if="${loggedinuser.role} == 'ROLE_ADMIN'">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
@@ -114,6 +112,7 @@
                                                 <th>Username</th>
                                                 <th>Role</th>
                                                 <th>Registered Date</th>
+                                                <th>Actions</th>
                                             </tr>
                                         </thead>
     
@@ -125,6 +124,48 @@
                                                     <td th:text="${user.username}"></td>
                                                     <td th:text="${#strings.substring(user.role, 5)}"></td>
                                                     <td th:text="${user.registeredDate}"></td>
+                                                    <td>
+                                                        <div class="d-flex justify-content-around">
+                                                            
+                                                            <span  th:if="${loggedinuser != 'anonymous'}">
+                                                                <a th:if="${loggedinuser.role == 'ROLE_ADMIN'}" class="btn btn-danger btn-circle btn-sm" title="approve"
+                                                                href="#" data-toggle="modal"
+                                                                th:data-target="'#deleteUser'+${user.id}">
+                                                                <i class="fas fa-trash"></i>
+                                                            </a>
+                                                            </span>
+                                                            
+                                                            <!-- Delete User Modal-->
+                                                            <div class="modal fade" th:id="'deleteUser'+${user.id}" tabindex="-2"
+                                                                role="dialog" aria-labelledby="exampleModalLabel"
+                                                                aria-hidden="true">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel1">
+                                                                                Delete User?</h5>
+                                                                            <button class="close" type="button"
+                                                                                data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">×</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">Select "Delete" below if you
+                                                                           really want to delete User <span th:text="${user.email}"></span>.
+                                                                           <br>
+                                                                           <span class="text-danger">All the courses and articles written by "<span th:text="${user.name}"></span>" will be deleted permanently!</span>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button class="btn btn-secondary" type="button"
+                                                                                data-dismiss="modal">Cancel
+                                                                            </button>
+                                                                            <a class="btn btn-danger"
+                                                                                th:href="@{/home/delete/{slug} (slug = ${user.email})}">Delete</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
                                                 </span>
     
                                             </tr>
@@ -172,6 +213,7 @@
                                                 <th>Username</th>
                                                 <th>Role</th>
                                                 <th>Registered Date</th>
+                                                <th>Actions</th>
                                             </tr>
                                         </thead>
     
@@ -183,6 +225,48 @@
                                                     <td th:text="${user.username}"></td>
                                                     <td th:text="${#strings.substring(user.role, 5)}"></td>
                                                     <td th:text="${user.registeredDate}"></td>
+                                                    <td>
+                                                        <div class="d-flex justify-content-around">
+                                                            
+                                                            <span  th:if="${loggedinuser != 'anonymous'}">
+                                                                <a th:if="${loggedinuser.role == 'ROLE_ADMIN'}" class="btn btn-danger btn-circle btn-sm" title="approve"
+                                                                href="#" data-toggle="modal"
+                                                                th:data-target="'#deleteUser'+${user.id}">
+                                                                <i class="fas fa-trash"></i>
+                                                            </a>
+                                                            </span>
+                                                            
+                                                            <!-- Delete User Modal-->
+                                                            <div class="modal fade" th:id="'deleteUser'+${user.id}" tabindex="-2"
+                                                                role="dialog" aria-labelledby="exampleModalLabel"
+                                                                aria-hidden="true">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel1">
+                                                                                Delete User?</h5>
+                                                                            <button class="close" type="button"
+                                                                                data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">×</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">Select "Delete" below if you
+                                                                           really want to delete User <span th:text="${user.email}"></span>.
+                                                                           <br>
+                                                                           <span class="text-danger">All the courses and articles written by "<span th:text="${user.name}"></span>" will be deleted permanently!</span>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button class="btn btn-secondary" type="button"
+                                                                                data-dismiss="modal">Cancel
+                                                                            </button>
+                                                                            <a class="btn btn-danger"
+                                                                                th:href="@{/home/delete/{slug} (slug = ${user.email})}">Delete</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
                                                 </span>
     
                                             </tr>
@@ -230,6 +314,7 @@
                                                 <th>Username</th>
                                                 <th>Role</th>
                                                 <th>Registered Date</th>
+                                                <th>Actions</th>
                                             </tr>
                                         </thead>
     
@@ -241,6 +326,48 @@
                                                     <td th:text="${user.username}"></td>
                                                     <td th:text="${#strings.substring(user.role, 5)}"></td>
                                                     <td th:text="${user.registeredDate}"></td>
+                                                    <td>
+                                                        <div class="d-flex justify-content-around">
+                                                            
+                                                            <span  th:if="${loggedinuser != 'anonymous'}">
+                                                                <a th:if="${loggedinuser.role == 'ROLE_ADMIN'}" class="btn btn-danger btn-circle btn-sm" title="approve"
+                                                                href="#" data-toggle="modal"
+                                                                th:data-target="'#deleteUser'+${user.id}">
+                                                                <i class="fas fa-trash"></i>
+                                                            </a>
+                                                            </span>
+                                                            
+                                                            <!-- Delete User Modal-->
+                                                            <div class="modal fade" th:id="'deleteUser'+${user.id}" tabindex="-2"
+                                                                role="dialog" aria-labelledby="exampleModalLabel"
+                                                                aria-hidden="true">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel1">
+                                                                                Delete User?</h5>
+                                                                            <button class="close" type="button"
+                                                                                data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">×</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">Select "Delete" below if you
+                                                                           really want to delete User <span th:text="${user.email}"></span>.
+                                                                           <br>
+                                                                           <span class="text-danger">The user "<span th:text="${user.name}"></span>" will be deleted permanently!</span>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button class="btn btn-secondary" type="button"
+                                                                                data-dismiss="modal">Cancel
+                                                                            </button>
+                                                                            <a class="btn btn-danger"
+                                                                                th:href="@{/home/delete/{slug} (slug = ${user.email})}">Delete</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
                                                 </span>
     
                                             </tr>

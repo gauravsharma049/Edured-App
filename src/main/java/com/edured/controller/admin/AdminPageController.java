@@ -17,6 +17,8 @@ import com.edured.model.course_materials.Article;
 import com.edured.model.users.EduredUser;
 import com.edured.services.course_materials.ArticleService;
 import com.edured.services.users.EduredUserService;
+import com.edured.services.users.StudentService;
+import com.edured.services.users.TeacherService;
 
 @Controller
 @RequestMapping("/home")
@@ -25,6 +27,10 @@ public class AdminPageController {
     private EduredUserService userService;
     @Autowired
     private ArticleService articleService;
+    @Autowired
+    private TeacherService teacherService;
+    @Autowired
+    private StudentService studentService;
 
     @GetMapping("/dashboard")
     public String dashboard(Model model) {
@@ -131,4 +137,30 @@ public class AdminPageController {
         return "admin/posts.html";
     }
 
+    @GetMapping("/delete/{email}")
+    public String deleteUser(@PathVariable("email") String email, RedirectAttributes attributes, Principal principal) {
+        try {
+            String username = principal.getName();
+            if (userService.getUserByEmail(username).getRole().equals("ROLE_ADMIN")) {
+                String userRole = userService.getUserByEmail(email).getRole();
+
+                if (userRole.equals("ROLE_TEACHER")) {
+                    articleService.deleteArticlesOfUser(email);
+                    teacherService.deleteTeacher(
+                            teacherService.findByUserId(userService.getUserByEmail(email).getId()).getId());
+                    attributes.addFlashAttribute("success", "Successfully deleted user "+ email+"!!");
+                } else if (userRole.equals("ROLE_STUDENT")) {
+                    studentService.deleteStudent(
+                            studentService.findByUserId(userService.getUserByEmail(email).getId()).getStudentId());
+                    attributes.addFlashAttribute("success", "Successfully deleted user "+ email+"!!");
+                }
+            }
+            else{
+                attributes.addFlashAttribute("failed", "you are not the authorized user to make this request!");
+            }
+        } catch (Exception e) {
+            attributes.addFlashAttribute("failed", "Something went wrong!");
+        }
+        return "redirect:/home/users";
+    }
 }

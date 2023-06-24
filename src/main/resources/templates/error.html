@@ -17,9 +17,9 @@
     <div class="content pt-0">
         <div class="d-flex my-5 py-5 align-items-center justify-content-center flex-row" style="font-family: serif;">
             <div class="text-center">
-                <div class="fw-bold" style="font-size: 150px;">404</div>
+                <div class="fw-bold" style="font-size: 150px;" th:text="${error.statusCode}"></div>
             
-            <p class="text-capitalize fw-normal">The page you are looking for does not exists!</p>
+            <p class="text-capitalize fw-normal" th:text="${error.message}"></p>
             <a th:href="@{/}" class="text-decoration-none text-success fw-bold">
                 <p><i class="fas fa-long-arrow-alt-left"></i> 
                     <span class="text-capitalize">&nbsp back to homepage

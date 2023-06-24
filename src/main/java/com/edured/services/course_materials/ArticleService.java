@@ -65,4 +65,9 @@ public class ArticleService {
     public List<Article> getDeletedArticles(String username) {
         return articleRepository.findByDeletedAndWriterUsername(true, username);
     }
+
+    public void deleteArticlesOfUser(String email){
+        List<Article> articles= articleRepository.findByWriterUsername(email);
+        articleRepository.deleteAll(articles);
+    }
 }
