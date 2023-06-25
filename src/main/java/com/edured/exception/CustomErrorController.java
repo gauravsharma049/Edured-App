@@ -55,6 +55,11 @@ public class CustomErrorController implements ErrorController {
             error.put("statusCode", String.valueOf(statusCode));
             error.put("message", "Something Went Wrong on our side!");
         }
+        else if (statusCode == 405) {
+            // Handle 500 internal server error
+            error.put("statusCode", String.valueOf(statusCode));
+            error.put("message", "Something Went Wrong!");
+        }
         model.addAttribute("error", error);
         return "error";
     }

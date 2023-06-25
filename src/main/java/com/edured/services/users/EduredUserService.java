@@ -1,6 +1,7 @@
 package com.edured.services.users;
 
 
+import com.edured.dto.EduredUserDto;
 import com.edured.model.users.EduredUser;
 import com.edured.repository.users.EduredUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +23,12 @@ public class EduredUserService {
     public EduredUser getUserByEmail(String email){return userRepository.findByEmail(email);}
     public List<EduredUser> getAllUsers(){
         return userRepository.findAll();
+    }
+    public EduredUser getUserFromDto(EduredUserDto userDto){
+        EduredUser user = new EduredUser();
+        user.setEmail(userDto.getEmail());
+        user.setName(userDto.getName());
+        user.setPassword(userDto.getPassword());
+        return user;
     }
 }

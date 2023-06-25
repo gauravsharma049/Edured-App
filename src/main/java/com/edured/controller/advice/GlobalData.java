@@ -1,5 +1,6 @@
 package com.edured.controller.advice;
 
+import com.edured.dto.EduredUserDto;
 import com.edured.model.users.Student;
 import com.edured.services.users.EduredUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,8 @@ public class GlobalData {
     @ModelAttribute
     public void addCommonData(Model model, Principal principal) {
         try{
-            model.addAttribute("student", new Student());
+            // model.addAttribute("student", new Student());
+            model.addAttribute("student", new EduredUserDto());
             
             String userName = principal.getName();
             System.out.println("USERNAME: " + userName);
