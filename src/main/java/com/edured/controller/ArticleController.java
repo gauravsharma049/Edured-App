@@ -31,7 +31,7 @@ public class ArticleController {
             Article article = articleService.getArticleBySlug(slug);
             System.out.println("status is " + article.isStatus());
             if(article != null && article.isStatus()){
-                model.addAttribute("title", "Write Article");
+                model.addAttribute("title", article.getName());
                 model.addAttribute("article", article);
                 model.addAttribute("ad", advertisementService.getAdvertisements(4));
                 return "article";
