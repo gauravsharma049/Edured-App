@@ -55,7 +55,10 @@ public class AdminPageController {
         if(userRole.equals("ROLE_TEACHER")){
             List<Topic> topics = topicService.getTopicsByTeacerId(teacherService.findByUserId(user.getId()).getId());
             model.addAttribute("topics", topics);
-            model.addAttribute("maxViewCount", topics.get(0).getViewCount());
+            if(topics.size() > 0)
+                model.addAttribute("maxViewCount", topics.get(0).getViewCount());
+            else
+                model.addAttribute("maxViewCount", 0);
         }
         return "admin/index.html";
     }
