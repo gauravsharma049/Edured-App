@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -30,10 +32,11 @@ public class TeacherController {
     @Autowired
     TopicServices topicService;
     @PostMapping("/add-course")
-    public String addCourse(@ModelAttribute("course") Course course){
-        courseService.addCourse(course);
+    public String addCourse(@ModelAttribute("course") Course course, Principal principal){
+        courseService.addCourse(course, principal);
         return "redirect:/dashboard/"+teacherService.getTeacherById(course.getTeacher().getId()).getUser().getEmail();
     }
+
     @PostMapping("/add-lesson")
     public String addLesson(@ModelAttribute("lesson") Lesson lesson, HttpServletRequest request){
         lessonService.addLesson(lesson);
@@ -47,8 +50,9 @@ public class TeacherController {
         return "redirect:" + referer;
     }
     @GetMapping("/write-tutorial")
-    public String writeTutorial(Model model){
-        List<Course> c = courseService.getAllCourses();
+    public String writeTutorial(Model model, Principal principal){
+        model.addAttribute("title", "Write Tutorial");
+        List<Course> c = courseService.getCourseByTeacherId(principal);
         model.addAttribute("courses", c);
         model.addAttribute("topic", new Topic());
         return "WriteTutorial";
@@ -58,7 +62,6 @@ public class TeacherController {
         System.out.println("lessonId:-"+topic.getLesson().getId()+"\ntopicName:"+topic.getName()+"\ntopicSlug:"+topic.getSlug()+"\ntopicContent:"+topic.getContent());
         topicService.addTopic(topic);
         return "redirect:/t/"+ lessonService.getLessonById(topic.getLesson().getId()).getCourse().getSlug()+"/"+topic.getSlug();
-
     }
 
 }

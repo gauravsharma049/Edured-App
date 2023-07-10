@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="admin/base::layout(~{:: .content})">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="content mt-4">
+        <link th:href="@{/edured-admin/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
+        <div th:if="${success}" class="text-center alert alert-custom-success">
+            <span th:text="${success}"></span>
+        </div>
+        <div th:if="${failed}" class="mt-1 text-center alert alert-custom-danger">
+            <span th:text="${failed}"></span>
+        </div>
+        
+
+        <div class="card mt-4">
+            <form method="post" th:object="${ad}">
+                <div class="card-header d-flex justify-content-between">
+                    <h1 class="h3 mb-0 text-gray-800">Add New Advertisement</h1>
+                    <button type="submit" class="d-sm-inline-block btn btn-sm btn-info-dark shadow-sm"><i
+                        class="fas fa-plus-square fa-sm text-white-50"></i> Add</button>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                           
+                            <div class="row p-2">
+                                <div class="col">
+                                    <div class="input-group">
+                                        <div class="input-group-text bg-info-dark text-white" style="border-radius: 0.35rem 0 0 0.35rem;">Ad Type</div>
+                                        <select class="form-control bg-light" name="" id="" th:field="*{type}" required>
+                                            <option value="img">Image</option>
+                                            <option value="vid">Video</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="input-group">
+                                        <div class="input-group-text bg-info-dark text-white" style="border-radius: 0.35rem 0 0 0.35rem;">@</div>
+                                        <input type="text" class="form-control border-left-0" required id="autoSizingInputGroup" placeholder="ad image/video link" th:field="*{imageVideoUrl}">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="input-group">
+                                        <div class="input-group-text bg-info-dark text-white" style="border-radius: 0.35rem 0 0 0.35rem;">@</div>
+                                        <input type="text" class="form-control border-left-0" required id="autoSizingInputGroup" placeholder="ad target link" th:field="*{adLink}">
+                                    </div>
+                                </div>
+                               
+                            </div>
+    
+                        </div>
+                    </div>
+                    
+                </div>
+            </form>
+        </div>
+        <div class="card mt-4">
+            <div class="card-header d-flex justify-content-between">
+                <h1 class="h3 mb-0 text-gray-800">Advertisements</h1>
+            </div>
+            <div class="card-body">
+                <div id="publishedArticles" class="table-responsive">
+                    <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                       
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table class="table table-bordered dataTable" id="dataTable" width="100%"
+                                    cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                                    <thead>
+                                        <tr role="row">
+                                            <th>Ad id</th>
+                                            <th>Type</th>
+                                            <th>img/video</th>
+                                            <th>img/video src</th>
+                                            <th>adLink</th>
+                                            <th>view count</th>
+                                            <th>click count</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <span th:each="ad : ${ads}">
+                                            <tr>
+                                                <td th:text="${ad.id}"></td>
+                                                <td th:text="${ad.type}"></td>
+                                                <td style="width: 80px;">
+                                                    <img th:if="${ad.type}=='img'" class="img-fluid" th:src="@{{imgSrc}(imgSrc=${ad.imageVideoUrl})}" alt="">
+                                                    <video th:if="${ad.type}=='vid'" class="img-fluid" th:src="@{{vidSrc}(vidSrc=${ad.imageVideoUrl})}"></video>
+                                                </td>
+                                                <td th:text="${ad.imageVideoUrl}"></td>
+                                                <td th:text="${ad.adLink}"></td>
+                                                <td th:text="${ad.viewCount}"></td>
+                                                <td th:text="${ad.clickCount}"></td>
+                                            </tr>
+                                        </span>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <!-- Page level plugins -->
+        <script th:src="@{/edured-admin/vendor/datatables/jquery.dataTables.min.js}"></script>
+        <script th:src="@{/edured-admin/vendor/datatables/dataTables.bootstrap4.min.js}"></script>
+
+        <!-- Page level custom scripts -->
+        <script th:src="@{/edured-admin/js/demo/datatables-demo.js}"></script>
+    </div>
+</body>
+
+</html>

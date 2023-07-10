@@ -89,6 +89,7 @@ public class UserController {
     @GetMapping("/teacher-signup")
     public String teacherSignUp(Model model) {
         // model.addAttribute("teacher", new Teacher());
+        model.addAttribute("title", "Teacher SignUp");
         model.addAttribute("teacher", new EduredUserDto());
         return "teacher-signup";
     }

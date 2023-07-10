@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.edured.model.course_materials.Article;
 import com.edured.model.course_materials.Topic;
+import com.edured.model.files.Advertisement;
 import com.edured.model.users.EduredUser;
 import com.edured.services.course_materials.ArticleService;
 import com.edured.services.course_materials.TopicServices;
@@ -28,6 +30,7 @@ import com.edured.services.files.FileService;
 import com.edured.services.users.EduredUserService;
 import com.edured.services.users.StudentService;
 import com.edured.services.users.TeacherService;
+import com.edured.services.util.AdvertisementService;
 
 @Controller
 @RequestMapping("/home")
@@ -42,6 +45,8 @@ public class AdminPageController {
     private StudentService studentService;
     @Autowired
     private FileService fileService;
+    @Autowired
+    private AdvertisementService advertisementService;
     @Autowired
     private TopicServices topicService;
     @Value("${project.image}")
@@ -224,5 +229,25 @@ public class AdminPageController {
             attributes.addFlashAttribute("failed", "Something went wrong!");
         }
         return "redirect:/home/users";
+    }
+
+    @GetMapping("/ads")
+    public String getAds(Model model){
+        model.addAttribute("title", "Advertisements");
+        model.addAttribute("ads", advertisementService.getAllAdvertisements());
+        model.addAttribute("ad", new Advertisement());
+        return "admin/advertisement";
+    }
+
+    @PostMapping("/ads")
+    public String addAds(@ModelAttribute("ad") Advertisement advertisement, RedirectAttributes attributes){
+        try{
+            advertisementService.saveAdvertisement(advertisement);
+            attributes.addFlashAttribute("success", "Advertisement added successfully!");
+        }
+        catch(Exception e){
+            attributes.addFlashAttribute("failed", "Something went wrong!");
+        }
+        return "redirect:/home/ads";
     }
 }

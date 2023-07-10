@@ -2,7 +2,6 @@ package com.edured.services.files;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -89,7 +88,12 @@ public class FileServiceImpl implements FileService {
         File file = new File(filePath);
         if (file.exists()) {
             file.delete();
+        }
+        try{
             fileRepository.delete(fileRepository.findByFileName(imageName));
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
         }
     }
 

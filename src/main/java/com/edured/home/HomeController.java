@@ -1,5 +1,6 @@
 package com.edured.home;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -102,7 +103,7 @@ public class HomeController {
     }
 
     @GetMapping("/dashboard/{username}")
-    public String dashboard(@PathVariable("username") String username, Model model){
+    public String dashboard(@PathVariable("username") String username, Model model, Principal principal){
         model.addAttribute("role", username);
 
         if(userService.getUserByEmail(username).getRole().equalsIgnoreCase("role_student")){
@@ -115,8 +116,7 @@ public class HomeController {
             model.addAttribute("userdetail", userService.getUserByEmail(username));
             model.addAttribute("course", new Course());
             model.addAttribute("lesson", new Lesson());
-            model.addAttribute("teachers", teacherService.getAllTeachers());
-            model.addAttribute("courses", courseService.getAllCourses());
+            model.addAttribute("courses", courseService.getCourseByTeacherId(principal));
             return "teacher_dashboard";
         }
         else if(userService.getUserByEmail(username).getRole().equalsIgnoreCase("role_admin")){

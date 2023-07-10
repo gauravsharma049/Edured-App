@@ -26,9 +26,9 @@
         <div class="row">
             <div class="col-xl-2 col-md-3 col-sm-4 col-6 mb-4" th:each="image : ${images}">
                 <div class="card border-all-primary shadow h-100">
-                    <div class="card-body p-1 overflow-hidden text-center" style="max-height: 185px;">
-                        <img class="img-fluid" th:src="@{/files/images/}+${image.fileName}" alt="" data-toggle="modal"
-                            th:data-target="'#exampleModal'+${image.id}">
+                    <div class="card-body p-1 overflow-hidden text-center" style="max-height: 185px;" data-toggle="modal"
+                    th:data-target="'#exampleModal'+${image.id}">
+                        <img class="img-fluid" th:src="@{/files/images/}+${image.fileName}" alt="">
                     </div>
                 </div>
                 <div class="modal-wrapper">

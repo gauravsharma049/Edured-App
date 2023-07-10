@@ -1,6 +1,7 @@
 package com.edured.controller.advice;
 
 import com.edured.dto.EduredUserDto;
+import com.edured.services.course_materials.CourseServices;
 import com.edured.services.users.EduredUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -12,13 +13,15 @@ import java.security.Principal;
 @ControllerAdvice
 public class GlobalData {
     @Autowired
-    EduredUserService userService;
+    private EduredUserService userService;
+    @Autowired
+    private CourseServices courseService;
     @ModelAttribute
     public void addCommonData(Model model, Principal principal) {
         try{
             // model.addAttribute("student", new Student());
             model.addAttribute("student", new EduredUserDto());
-            
+            model.addAttribute("footerCourse", courseService.getAllCourses());
             String userName = principal.getName();
             // System.out.println("USERNAME: " + userName);
             model.addAttribute("loggedinuser", userService.getUserByEmail(userName));

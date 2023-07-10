@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 @RequestMapping("/rest")
 @RestController
@@ -74,8 +75,8 @@ public class EduredRestController {
     }
 
     @PostMapping("/course")
-    public Course addCourse(@RequestBody Course course){
-        return courseService.addCourse(course);
+    public Course addCourse(@RequestBody Course course, Principal principal){
+        return courseService.addCourse(course, principal);
     }
     @GetMapping("/course")
     public List<Course> getAllCourse(){

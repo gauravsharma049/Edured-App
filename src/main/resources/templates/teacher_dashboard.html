@@ -127,12 +127,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <form action="/teacher/add-course" method="post" th:object="${course}">
-                                                <select name="" id="" th:field="*{teacher.id}">
-                                                    <option value="1">select</option>
-                                                    <span th:each="t : ${teachers}">
-                                                        <option th:value="${t.id}" th:text="${t.user.name}"></option>
-                                                    </span>
-                                                </select>
+                                                
                                                 <input type="text" placeholder="course name" th:field="*{courseName}">
                                                 <input type="text" placeholder="course-slug" th:field="*{slug}">
                                         </div>

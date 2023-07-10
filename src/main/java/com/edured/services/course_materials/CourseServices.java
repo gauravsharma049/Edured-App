@@ -2,18 +2,28 @@ package com.edured.services.course_materials;
 
 
 import com.edured.model.course_materials.Course;
+import com.edured.model.users.EduredUser;
 import com.edured.repository.course_materials.CourseRepository;
+import com.edured.services.users.EduredUserService;
+import com.edured.services.users.TeacherService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.List;
 
 @Service
 public class CourseServices {
     @Autowired
-    CourseRepository courseRepository;
+    private CourseRepository courseRepository;
+    @Autowired
+    private EduredUserService userService;
+    @Autowired 
+    private TeacherService teacherService;
 
-    public Course addCourse(Course course){
+    public Course addCourse(Course course, Principal principal){
+        course.setTeacher(teacherService.findByUserId(userService.getLoggedInUser(principal).getId()));
         return courseRepository.save(course);
     }
     public Course updateCourse(Course course){
@@ -30,6 +40,17 @@ public class CourseServices {
 
     public List<Course> getAllCourses(){
         return courseRepository.findAll();
+    }
+
+    public List<Course> getCourseByTeacherId(Principal principal){
+        EduredUser user = userService.getLoggedInUser(principal);
+        if(user == null){
+            return null;
+        }
+        long userId = user.getId();
+        long teacherId = teacherService.findByUserId(userId).getId();
+        List<Course> courses = courseRepository.findByTeacherId(teacherId);
+        return courses;
     }
 
     public void deleteCourse(long id){

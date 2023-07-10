@@ -50,6 +50,12 @@
                             </div>
                         </div>
                     </div>
+                    <div th:if="${ad}!=null" class="myAd-left p-1 mt-5">
+                        <div style="width: 100%; border-left: 1px solid black;">
+                            <div class="bg-dark text-white pl-1 ">ad</div>
+                            <img class="img-fluid" th:src="@{{imgSrc}(imgSrc=${ad[0].imageVideoUrl})}" alt="">
+                        </div>
+                    </div>
                     <!-- <div class="index-table-content"></div>
                     <div class="index-table-content"></div>
                     <div class="index-table-content"></div>
@@ -57,12 +63,12 @@
                 </div>
 
                 <div class="course-content col mb-4 rounded-3 ">
-                    <div id="courseContent" class="course-content-topics">
+                    <div id="courseContent" class="course-content-topics p-3 pt-1 bg-light">
                         <!-- <div th:text="${topic.content}"></div> -->
                         <!-- below code will write the styled html on browser -->
                         [(${topic.content})]
                     </div>
-                    <div class="d-flex prevNext justify-content-between">
+                    <div class="d-flex prevNext justify-content-between mt-4">
                         <a class="btn btn-success preTutBtn btn-sm" href="">previous</a>
                         <a class="btn btn-success nextTutBtn btn-sm" href="">next</a>
                     </div>
@@ -192,8 +198,11 @@
                     </div>
                 </div>
                 <div class="col-3 mt-3 index-table rightSidebar">
-                    <div class="ad-right">
-                        <div style="height: 300px; width: 100%; background:black;"></div>
+                    <div th:if="${ad}!=null" class="myAd-right p-1">
+                        <div style="width: 100%; border-left: 1px solid black;">
+                            <div class="bg-dark text-white pl-1 ">ad</div>
+                            <img class="img-fluid" th:src="@{{imgSrc}(imgSrc=${ad[1].imageVideoUrl})}" alt="">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -208,20 +217,20 @@
         console.log(links);
 
         console.log(url);
-        
+
         var linkArray = [];
         links.forEach(link => {
             linkArray.push(link.getAttribute('href'));
             if (link.getAttribute('href') === url) {
                 link.parentElement.classList.add('active');
-                
+
             }
         });
-        
+
         /* --------------- logic for pre and next button -------------------- */
-        function findUrlIndex(arr, currUrl){
-            for(let i=0; i<arr.length; i++){
-                if(arr[i] === currUrl){
+        function findUrlIndex(arr, currUrl) {
+            for (let i = 0; i < arr.length; i++) {
+                if (arr[i] === currUrl) {
                     return i;
                 }
             }
@@ -230,10 +239,10 @@
         let preUrl = linkArray[0];
         let nextUrl = linkArray[linkArray.length - 1];
         let currUrlIndex = findUrlIndex(linkArray, url);
-        if(currUrlIndex != 0 && currUrlIndex != -1){
+        if (currUrlIndex != 0 && currUrlIndex != -1) {
             preUrl = linkArray[currUrlIndex - 1];
         }
-        if(currUrlIndex != linkArray.length - 1 && currUrlIndex != -1){
+        if (currUrlIndex != linkArray.length - 1 && currUrlIndex != -1) {
             nextUrl = linkArray[currUrlIndex + 1];
         }
         document.querySelector('.preTutBtn').setAttribute('href', preUrl);
@@ -331,6 +340,8 @@
         }
 
     </script>
+    <script th:src="@{/js/article-lesson.js}"></script>
+    
 </body>
 
 </html>

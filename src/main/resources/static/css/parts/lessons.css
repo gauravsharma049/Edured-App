@@ -83,10 +83,13 @@
     background-color: #282739;
     border: 1px solid #cccccc;
     padding: 10px 15px;
-    color: #23ce6b;
-    border-radius: 10px;
+    /* color: #23ce6b; */
+    color: #eee30e;
+    /* border-radius: 10px; */
+    border-radius: 0.375rem;
     /* color: white; */
-    overflow-x: auto;
+    max-height: 600px;
+    overflow: auto;
 
 }
 
@@ -127,6 +130,9 @@
         height: 30px;
     }
     .rightSidebar{
+        display: none;
+    }
+    .myAd-left{
         display: none;
     }
 }

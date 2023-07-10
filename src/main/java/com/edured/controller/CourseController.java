@@ -21,20 +21,23 @@ import com.edured.model.course_materials.Topic;
 import com.edured.services.course_materials.CommentService;
 import com.edured.services.course_materials.CourseServices;
 import com.edured.services.course_materials.TopicServices;
+import com.edured.services.util.AdvertisementService;
 import com.edured.services.util.UtilityClass;
 
 @Controller
 @RequestMapping("/t")
 public class CourseController {
     @Autowired
-    CourseServices courseService;
+    private CourseServices courseService;
     @Autowired
-    TopicServices topicService;
+    private TopicServices topicService;
 
     @Autowired
-    CommentService commentService;
+    private CommentService commentService;
     @Autowired
-    LoggedInUserInfo loggedInUserInfo;
+    private LoggedInUserInfo loggedInUserInfo;
+    @Autowired 
+    private AdvertisementService advertisementService;
 
     @GetMapping("/{c-slug}")
     public String getPage(@PathVariable("c-slug") String slug){
@@ -51,6 +54,7 @@ public class CourseController {
             return "courseIntro";
         }
     }
+    
     @GetMapping("/{c-slug}/{t-slug}")
     public String getCoursePage(@PathVariable("c-slug") String courseSlug, @PathVariable("t-slug") String topicSlug, Model model){
         boolean status=false;
@@ -74,6 +78,7 @@ public class CourseController {
                     l.setTopics(topics);
                 }
                 model.addAttribute("lessons", lessons);
+                model.addAttribute("ad", advertisementService.getTwoAdvertisements());
                 return "lessons";
             }
         }
