@@ -1,7 +1,6 @@
 package com.edured.controller.advice;
 
 import com.edured.dto.EduredUserDto;
-import com.edured.model.users.Student;
 import com.edured.services.users.EduredUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -21,7 +20,7 @@ public class GlobalData {
             model.addAttribute("student", new EduredUserDto());
             
             String userName = principal.getName();
-            System.out.println("USERNAME: " + userName);
+            // System.out.println("USERNAME: " + userName);
             model.addAttribute("loggedinuser", userService.getUserByEmail(userName));
 
         }

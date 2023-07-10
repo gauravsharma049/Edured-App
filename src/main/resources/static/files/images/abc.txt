@@ -1,0 +1,1 @@
+Integer: This data type represents whole numbers without fractional parts. It can be divided into different sizes, such as int (typically 32 bits) and long (typically 64 bits). Examples of integer variables in C are:

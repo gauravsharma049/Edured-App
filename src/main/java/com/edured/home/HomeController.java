@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +20,7 @@ import com.edured.model.course_materials.Lesson;
 import com.edured.model.course_materials.Topic;
 import com.edured.services.course_materials.CourseServices;
 import com.edured.services.course_materials.SearchResultService;
+import com.edured.services.files.FileService;
 import com.edured.services.users.EduredUserService;
 import com.edured.services.users.TeacherService;
 
@@ -31,6 +34,12 @@ public class HomeController {
     TeacherService teacherService;
     @Autowired
     SearchResultService searchResultService;
+    @Autowired 
+    private FileService fileService;
+    @Value("${project.image}")
+    private String path;
+
+    
     @GetMapping("/")
     public String home(Model model){
         model.addAttribute("courses", courseService.getAllCourses());
@@ -135,6 +144,11 @@ public class HomeController {
     @GetMapping("/abcd")
     public String abcd(){
         return "abcd";
+    }
+
+    @GetMapping("/files/images/{fileName}")
+    public void getImageResource(@PathVariable("fileName") String fileName, HttpServletResponse response){
+        fileService.getImageResource(path, fileName, response);
     }
 
 }

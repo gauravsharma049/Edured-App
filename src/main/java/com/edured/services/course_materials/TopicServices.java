@@ -43,4 +43,12 @@ public class TopicServices {
     public List<Topic> getTopicByLessonSlug(String slug) {
         return topicRepository.findByLessonSlug(slug);
     }
+
+    public void updateTopicViewCount(long topicId){
+        topicRepository.updateViewCount(topicRepository.findById(topicId).get().getViewCount()+1, topicId);
+    }
+
+    public List<Topic> getTopicsByTeacerId(long id){
+        return topicRepository.findByLessonCourseTeacherIdOrderByViewCountDesc(id);
+    }
 }

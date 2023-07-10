@@ -3,6 +3,7 @@ package com.edured.model.course_materials;
 
 import javax.persistence.*;
 
+import com.edured.services.util.Identifiable;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.Getter;
@@ -13,7 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class Topic {
+public class Topic implements Identifiable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -24,6 +25,7 @@ public class Topic {
     private String slug;
     private String dateOfCreation;
     private String lastUpdatedDate;
+    private long viewCount;
 //    @JsonIgnore
     @JsonBackReference
     @ManyToOne

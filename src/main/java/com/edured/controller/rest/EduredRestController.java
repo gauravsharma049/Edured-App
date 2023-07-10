@@ -4,12 +4,15 @@ import com.edured.model.course_materials.*;
 import com.edured.model.users.Student;
 import com.edured.model.users.Teacher;
 import com.edured.services.course_materials.*;
+import com.edured.services.files.FileService;
 import com.edured.services.users.StudentService;
 import com.edured.services.users.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 @RequestMapping("/rest")
 @RestController
@@ -32,9 +35,23 @@ public class EduredRestController {
     @Autowired
     ArticleService articleService;
 
+    @Autowired private FileService fileService;
+
     @GetMapping("/welcome")
     public String welcome(){
         return "welcome boy";
+    }
+    @PostMapping("/file/upload")
+    public String uploadFile(@RequestParam("image") MultipartFile file){
+        try{
+            fileService.uploadFile(file);
+        }
+        catch(IOException e){
+            e.printStackTrace();
+            return "something went wrong!";
+        }
+        
+        return "uploaded successfully";
     }
     @GetMapping("/student")
     public List<Student> student(){

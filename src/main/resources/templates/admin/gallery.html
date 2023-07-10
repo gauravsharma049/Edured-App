@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="admin/base::layout(~{:: .content})">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="content mt-4">
+        <div th:if="${success}" class="text-center alert alert-custom-success">
+            <span th:text="${success}"></span>
+        </div>
+        <div th:if="${failed}" class="mt-1 text-center alert alert-custom-danger">
+            <span th:text="${failed}"></span>
+        </div>
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Gallery</h1>
+            <button class="d-none d-sm-inline-block btn btn-sm btn-info-dark shadow-sm" data-toggle="modal"
+                data-target="#uploadImage"><i class="fas fa-upload fa-sm text-white-50"></i> Upload
+                Images/documents</button>
+        </div>
+        
+        <div class="row">
+            <div class="col-xl-2 col-md-3 col-sm-4 col-6 mb-4" th:each="image : ${images}">
+                <div class="card border-all-primary shadow h-100">
+                    <div class="card-body p-1 overflow-hidden text-center" style="max-height: 185px;">
+                        <img class="img-fluid" th:src="@{/files/images/}+${image.fileName}" alt="" data-toggle="modal"
+                            th:data-target="'#exampleModal'+${image.id}">
+                    </div>
+                </div>
+                <div class="modal-wrapper">
+
+
+                    <!-- view image Modal-->
+                    <div class="modal fade" th:id="'exampleModal'+${image.id}" tabindex="-2" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel1" th:text="${image.fileName}"></h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <img class="img-fluid" th:src="@{/files/images/}+${image.fileName}" alt=""> 
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel
+                                    </button>
+                                    <a class="btn btn-danger" th:href="@{/home/delete/image/{imageName}(imageName=${image.fileName})}">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+        <!-- upload image Modal-->
+        <div class="modal-wrapper">
+            <div class="modal fade" id="uploadImage" tabindex="-3" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel1">Upload Files</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post" th:action="@{/home/upload/files}" enctype="multipart/form-data" style="height: 200px;">
+                                <input type="file" name="files" id="file"><br><br>
+                                <input type="submit" value="Upload" class="btn btn-primary">
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</body>
+
+</html>

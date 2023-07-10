@@ -1,6 +1,7 @@
 package com.edured.controller;
 
 import java.security.Principal;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,6 +21,7 @@ import com.edured.model.course_materials.Topic;
 import com.edured.services.course_materials.CommentService;
 import com.edured.services.course_materials.CourseServices;
 import com.edured.services.course_materials.TopicServices;
+import com.edured.services.util.UtilityClass;
 
 @Controller
 @RequestMapping("/t")
@@ -38,6 +40,8 @@ public class CourseController {
     public String getPage(@PathVariable("c-slug") String slug){
         try{
             Lesson lesson = courseService.getCourseBySlug(slug).getLessons().stream().findFirst().get();
+            List<Topic> topics = lesson.getTopics();
+            UtilityClass.sortById(topics);
             Topic topic = lesson.getTopics().stream().findFirst().get();
             String redirectSlug = topic.getSlug();
             return "redirect:/t/"+slug+"/"+redirectSlug;
@@ -58,11 +62,18 @@ public class CourseController {
             if (status){
                 model.addAttribute("topic", topic);
                 model.addAttribute("comments", commentService.getCommentsByTopicId(topic.getId()));
+                topicService.updateTopicViewCount(topic.getId());
                 Comment comment = new Comment();
                 comment.setTopic(topic);
                 model.addAttribute("comment", comment);
                 model.addAttribute("title", topic.getName());
-                model.addAttribute("lessons", courseService.getCourseBySlug(courseSlug).getLessons());
+                List<Lesson> lessons = courseService.getCourseBySlug(courseSlug).getLessons();
+                for(Lesson l:lessons){
+                    List<Topic> topics = l.getTopics();
+                    UtilityClass.sortById(topics);
+                    l.setTopics(topics);
+                }
+                model.addAttribute("lessons", lessons);
                 return "lessons";
             }
         }

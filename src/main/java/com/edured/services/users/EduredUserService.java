@@ -7,6 +7,7 @@ import com.edured.repository.users.EduredUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.List;
 
 @Service
@@ -30,5 +31,15 @@ public class EduredUserService {
         user.setName(userDto.getName());
         user.setPassword(userDto.getPassword());
         return user;
+    }
+
+    public EduredUser getLoggedInUser(Principal principal){
+        try{
+            String username = principal.getName();
+            return getUserByEmail(username);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
 }

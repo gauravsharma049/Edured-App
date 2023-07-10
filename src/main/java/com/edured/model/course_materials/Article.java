@@ -32,6 +32,7 @@ public class Article {
     private String lastUpdatedDate;
     private boolean status;
     private boolean deleted;
+    private long viewCount;
     @ManyToOne
     private EduredUser writer;
 }

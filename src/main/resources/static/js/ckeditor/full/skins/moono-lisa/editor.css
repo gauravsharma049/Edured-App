@@ -81,7 +81,7 @@ For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
     table-layout: auto
 }
 #cke_1_contents{
-    height: 500px !important;
+    min-height: 500px !important;
 }
 .cke_chrome {
     display: block;

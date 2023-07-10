@@ -6416,6 +6416,10 @@ a.close.disabled {
     .modal-xl {
         max-width: 800px
     }
+    .modal-dialog {
+        max-width: 800px;
+        margin: 1.75rem auto
+    }
 }
 
 @media (min-width:1200px) {
@@ -11280,6 +11284,9 @@ a:focus {
 
 .border-left-primary {
     border-left: .25rem solid #4e73df !important
+}
+.border-all-primary {
+    border: .25rem solid #4e73df !important
 }
 
 .border-bottom-primary {

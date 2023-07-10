@@ -62,8 +62,8 @@
                 </div>
 
                 <div class="form-outline mb-4">
-                  <input type="password" placeholder="repeat-password" id="form3Example4cdg" class="form-control form-control-lg" th:field="*{confirmPassword}" th:classappend="${#fields.hasErrors('confirmPassword')}?'is-invalid':''"/>
-                  <div class="invalid-feedback" th:each=" error: ${#fields.errors('confirmPassword')}" th:text="${error}"></div>
+                  <input type="password" placeholder="repeat-password" id="form3Example4cdg" class="form-control form-control-lg" th:field="*{confirmPassword}" th:classappend="${#fields.hasErrors('passwordMatching')}?'is-invalid':''"/>
+                  <div class="invalid-feedback" th:each=" error: ${#fields.errors('passwordMatching')}" th:text="${error}"></div>
                 </div>
 
                 <div class="form-check d-flex justify-content-center mb-5">

@@ -153,18 +153,20 @@
                         <div class="footer-item">
                             <h4>Company</h4>
                             <ul class="footer-link">
-                                <a href="/parts/about.html">
+                                <a th:href="@{/about}">
                                     <li class="footer-link-list">About</li>
                                 </a>
                                 <li class="footer-link-list">Privacy Policy</li>
                                 <li class="footer-link-list">Terms & conditions</li>
-                                <a href="/parts/contact.html">
+                                <a th:href="@{/contact-us}">
                                     <li class="footer-link-list">Contact</li>
                                 </a>
-                                <a href="/parts/blog.html">
+                                <a th:href="@{/blog}">
                                     <li class="footer-link-list">Blog</li>
                                 </a>
-                                <li class="footer-link-list">Youtube</li>
+                                <a target="_blank" href="https://www.youtube.com/@_edured">
+                                    <li class="footer-link-list">Youtube</li>
+                                </a>
 
 
                             </ul>
@@ -176,7 +178,7 @@
                 <hr style="margin: 0 13px;">
                 <div class="footer-end">
                     <div>
-                        <p><span class="copyright-edured-symbol">© 2022 edured</span> <span
+                        <p><span class="copyright-edured-symbol">© 2023 edured</span> <span
                                 style="color: #ffffff94;">company pvt.Ltd. All rights reserved.</span></p>
                     </div>
                     <div style="width: 100px;" class="d-flex justify-content-between text-decoration-none">
@@ -260,14 +262,14 @@
                     <p style="text-align:center">OR</p>
                     <div class="error-message" th:if="${#fields.hasErrors()}">
                     </div>
-                    <input type="text" id="username" class="form-control" placeholder="Username" required="" name="username" autofocus="" th:field="*{email}" th:classappend="${#fields.hasErrors('email')}?'is-invalid':''">
+                    <input type="email" id="username" class="form-control" placeholder="Username" required name="username" autofocus="" th:field="*{email}" th:classappend="${#fields.hasErrors('email')}?'is-invalid':''">
                     <div class="invalid-feedback" th:each=" error: ${#fields.errors('email')}" th:text="${error}"></div>
                     <input type="text" id="name" name="name" class="form-control" placeholder="Name" required autofocus="" th:field="*{name}" th:classappend="${#fields.hasErrors('name')}?'is-invalid':''">
                     <div class="invalid-feedback" th:each=" error: ${#fields.errors('name')}" th:text="${error}"></div>
                     <input type="password" id="password" name="password" class="form-control" placeholder="Password" required autofocus="" autocomplete="off" th:field="*{password}" th:classappend="${#fields.hasErrors('password')}?'is-invalid':''">
                     <div class="invalid-feedback" th:each=" error: ${#fields.errors('password')}" th:text="${error}"></div>
-                    <input type="password" id="user-repeatpass" class="form-control" placeholder="Repeat Password" required autofocus="" autocomplete="off" th:field="*{confirmPassword}" th:classappend="${#fields.hasErrors('confirmPassword')}?'is-invalid':''">
-                    <div class="invalid-feedback" th:each=" error: ${#fields.errors('confirmPassword')}" th:text="${error}"></div>
+                    <input type="password" id="user-repeatpass" class="form-control" placeholder="Repeat Password" required autofocus="" autocomplete="off" th:field="*{confirmPassword}" th:classappend="${#fields.hasErrors('passwordMatching')}?'is-invalid':''">
+                    <div class="invalid-feedback" th:each=" error: ${#fields.errors('passwordMatching')}" th:text="${error}"></div>
             
                     <button class="btn btn-primary btn-block" type="submit"><i class="fas fa-user-plus"></i> Sign Up</button>
                     <a href="#" id="cancel_signup"><i class="fas fa-angle-left"></i> Back</a>

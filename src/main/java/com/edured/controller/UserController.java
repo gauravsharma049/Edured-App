@@ -5,7 +5,6 @@ import java.security.Principal;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.aspectj.bridge.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -43,10 +42,11 @@ public class UserController {
 
     @PostMapping("/signup")
     public String SignUp(@Valid @ModelAttribute("student") EduredUserDto userDto, BindingResult bindingResult,
-            RedirectAttributes attributes, HttpSession session) {
+            RedirectAttributes attributes, HttpSession session, Model model) {
         if (bindingResult.hasErrors()) {
             System.out.println(bindingResult.getErrorCount());
             System.out.println(bindingResult.getAllErrors());
+            model.addAttribute("student", userDto);
             return "index";
         }
         try {
