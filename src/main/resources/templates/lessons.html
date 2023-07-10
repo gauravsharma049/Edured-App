@@ -50,7 +50,7 @@
                             </div>
                         </div>
                     </div>
-                    <div th:if="${ad}!=null" class="myAd-left p-1 mt-5">
+                    <div th:if="${ad!=null} and ${#lists.size(ad)!=0}" class="myAd-left p-1 mt-5">
                         <div style="width: 100%; border-left: 1px solid black;">
                             <div class="bg-dark text-white pl-1 ">ad</div>
                             <img class="img-fluid" th:src="@{{imgSrc}(imgSrc=${ad[0].imageVideoUrl})}" alt="">
@@ -198,7 +198,7 @@
                     </div>
                 </div>
                 <div class="col-3 mt-3 index-table rightSidebar">
-                    <div th:if="${ad}!=null" class="myAd-right p-1">
+                    <div th:if="${ad!=null} and ${#lists.size(ad)!=0}" class="myAd-right p-1">
                         <div style="width: 100%; border-left: 1px solid black;">
                             <div class="bg-dark text-white pl-1 ">ad</div>
                             <img class="img-fluid" th:src="@{{imgSrc}(imgSrc=${ad[1].imageVideoUrl})}" alt="">
