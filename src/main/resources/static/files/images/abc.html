@@ -1,0 +1,136 @@
+<div id="courseContent" class="course-content-topics p-3 text-start" style="background-color: #e9f9fb;">
+    <!-- <div th:text="${topic.content}"></div> -->
+    <!-- below code will write the styled html on browser -->
+    <h1>How to get user's location using GPS&nbsp;</h1>
+    <p>Knowing the user's location can greatly enhance the functionality and user experience of web and mobile
+        applications. By leveraging GPS (Global Positioning System) and geolocation technologies, developers can
+        retrieve precise location information from users' devices. In this article, we will explore how to utilize GPS
+        and geolocation to obtain user location in web applications.</p>
+    <ol>
+        <li><strong>Understanding GPS and Geolocation:</strong>&nbsp;GPS is a satellite-based navigation system that
+            provides accurate positioning information worldwide. Geolocation, on the other hand, is a web API that
+            utilizes various data sources, including GPS, Wi-Fi signals, and IP addresses, to estimate a user's
+            location.</li>
+        <li><strong>Checking Browser Support:</strong>&nbsp;Before implementing location retrieval, it's essential to
+            ensure the user's browser supports the Geolocation API. You can use JavaScript to check if the
+            navigator.geolocation object is available and supported.</li>
+        <li><strong>Requesting User Permission:</strong>&nbsp;To access the user's location, you need their explicit
+            permission. When requesting location access, provide clear information on why their location is needed and
+            how it will be utilized. Use the `<strong>navigator.geolocation.getCurrentPosition()</strong>` function to
+            prompt the user for permission and initiate the location retrieval process. Below is the code for
+            implementing the concept using javascript</li>
+    </ol>
+    <p>&nbsp;</p>
+    <div class="code">
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; var latitude;</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; var longitude;</p>
+        <p>&nbsp;</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; function getLocation() {</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (navigator.geolocation) {</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //this line of code will ask the request the user for
+            allowing the location permission</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            navigator.geolocation.getCurrentPosition(showPosition, showError);</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } else {</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; console.log("Geolocation is not supported by this
+            browser.");</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+        <p>&nbsp;</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; function showPosition(position) {</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; latitude = position.coords.latitude;</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; longitude = position.coords.longitude;</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //getting the user location from the latitude and longitude
+            obtained from user's device gps</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; getAddressFromCoordinates(latitude, longitude);</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; console.log("Latitude: " + latitude + ", Longitude: " + longitude);
+        </p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+        <p>&nbsp;</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; //handling errors while getting user location</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; function showError(error) {</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; switch (error.code) {</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; case error.PERMISSION_DENIED:</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; alert("User denied the request for
+            Geolocation.");</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; break;</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; case error.POSITION_UNAVAILABLE:</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; alert("Location information is
+            unavailable.");</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; break;</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; case error.TIMEOUT:</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; alert("The request to get user location
+            timed out.");</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; break;</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; case error.UNKNOWN_ERROR:</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; alert("An unknown error occurred.");
+        </p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; break;</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+        <p>&nbsp;</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; //this function will get the exact address of the user's location using latitude
+            and longitude</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; function getAddressFromCoordinates(latitude, longitude) {</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var url =
+            `https://nominatim.openstreetmap.org/reverse?format=json&amp;lat=${latitude}&amp;lon=${longitude}`;</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; fetch(url)</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .then(response =&gt; response.json())</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .then(data =&gt; {</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var address = data.display_name;</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var city = data.address.city;</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var country = data.address.country;</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; console.log("City: " + city)</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var locationInfo = "Latitude: " +
+            latitude + "&lt;br&gt;Longitude: " + longitude;</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (city) {</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; locationInfo +=
+            "&lt;br&gt;City: " + city;</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; console.log("City: " +
+            city)</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (country) {</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; locationInfo +=
+            "&lt;br&gt;Country: " + country;</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; console.log("Country: "
+            +country)</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; locationInfo += "&lt;br&gt;Address: " +
+            address;</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; console.log("Address: " + address)</p>
+        <p>&nbsp;</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            document.getElementById('location-info').innerHTML = locationInfo;</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; console.log(locationInfo)</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; })</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .catch(error =&gt; {</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; console.log(error);</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            document.getElementById('location-info').innerHTML = 'Error occurred while fetching location details';</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+        <p>&nbsp; &nbsp; &nbsp; &nbsp; getLocation();</p>
+    </div>
+    <p>&nbsp;</p>
+    <p>The provided code should be written in a separate JavaScript file or inside a &lt;script&gt; tag in the HTML
+        page. It consists of four functions: `<strong>getLocation()</strong>`, `<strong>showPosition()</strong>`,
+        `<strong>showError()</strong>`, and `<strong>getAddressFromCoordinates()</strong>`.</p>
+    <p>The `<strong>getLocation()</strong>` function checks if the `<strong>navigator.geolocation</strong>` is available
+        and supported by the browser. If it is, it calls `<strong>navigator.geolocation.getCurrentPosition(showPosition,
+            showError)</strong>` to obtain the user's location. The
+        `<strong>navigator.geolocation.getCurrentPosition(showPosition, showError)</strong>` function takes two
+        functions, `<strong>showPosition()</strong>` and `<strong>showError()</strong>`. The
+        `<strong>showPosition()</strong>` function retrieves the latitude and longitude of the user's location and calls
+        the `<strong>getAddressFromCoordinates(latitude, longitude)</strong>` function to obtain the exact location. The
+        `<strong>showError()</strong>` function handles the different types of errors that can occur while retrieving
+        the user's location.</p>
+    <p>In the `<strong>getAddressFromCoordinates()</strong>` function, latitude and longitude are passed as arguments.
+        The function sends a request to the API
+        `<strong>https://nominatim.openstreetmap.org/reverse?format=json&amp;lat=${latitude}&amp;lon=${longitude}</strong>`.
+        This API provides the location details of the user's device based on its GPS location as a response.</p>
+    <p>After obtaining the user's location, it prints the location on the screen.</p>
+    <blockquote>
+        <p>Note: It's important to handle errors gracefully and provide appropriate feedback to the user in case of any
+            issues while retrieving the location.</p>
+    </blockquote>
+</div>
