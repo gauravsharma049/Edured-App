@@ -4,6 +4,7 @@
 
 ::-webkit-scrollbar {
     width: 5px;
+    height: 5px;
 }
 
 /* Track */
@@ -25,6 +26,9 @@
 }
 body{
     font-family: sans-serif;
+}
+pre{
+    margin-bottom: 0;
 }
 .darkmode{
     height: 35px;

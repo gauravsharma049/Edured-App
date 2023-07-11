@@ -20,7 +20,9 @@
     <div class="content pt-2">
         <div class="cover">
             <div class="row m-0 w-100">
-                <div class="index-table col-3 mb-4 rounded-3 ">
+
+                <!-- Earnings (Monthly) Card Example -->
+                <div class="index-table col-xl-3 col-lg-3 mb-4">
                     <div style="padding-bottom: 1px;">
                         <div class="table-content-toggle-btn">
                             <div id="content-table">Table of Contents</div>
@@ -38,7 +40,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="index-table-content bg-white" id="lesson-index">
+                    <div class="index-table-content bg-light-dark" id="lesson-index">
                         <div th:each="l : ${lessons}">
                             <div class="lessonName" th:text="${l.name}"></div>
                             <div th:each="t : ${l.topics}">
@@ -56,16 +58,11 @@
                             <img class="img-fluid" th:src="@{{imgSrc}(imgSrc=${ad[0].imageVideoUrl})}" alt="">
                         </div>
                     </div>
-                    <!-- <div class="index-table-content"></div>
-                    <div class="index-table-content"></div>
-                    <div class="index-table-content"></div>
-                    <div class="index-table-content">25632</div> -->
                 </div>
 
-                <div class="course-content col mb-4 rounded-3 ">
-                    <div id="courseContent" class="course-content-topics p-3 pt-1 bg-light">
-                        <!-- <div th:text="${topic.content}"></div> -->
-                        <!-- below code will write the styled html on browser -->
+                <!-- Earnings (Monthly) Card Example -->
+                <div class="course-content col-xl-6 col-lg-6 mb-4">
+                    <div id="courseContent" class="course-content-topics p-3 pt-1 bg-light-dark">
                         [(${topic.content})]
                     </div>
                     <div class="d-flex prevNext justify-content-between mt-4">
@@ -75,7 +72,7 @@
                     <hr class="my-5">
                     <div th:if="${loggedinuser} != 'anonymous'" class="container px-0 text-dark">
                         <div class="row m-0 d-flex justify-content-center">
-                            <div class="card">
+                            <div class="card bg-light-dark">
                                 <div class="card-body p-4">
                                     <div class="d-flex flex-start w-100">
                                         <img class="rounded-circle shadow-1-strong me-3"
@@ -104,7 +101,7 @@
                                                 <div class="form-outline">
                                                     <input class="d-none" type="text" name="" id=""
                                                         th:field="*{topic.id}">
-                                                    <textarea class="form-control" id="textAreaExample" rows="4"
+                                                    <textarea class="form-control bg-light-dark" id="textAreaExample" rows="4"
                                                         th:field="*{commentContent}"></textarea>
                                                     <label class="form-label" for="textAreaExample">Ask Your
                                                         doubts</label>
@@ -123,7 +120,7 @@
                     </div>
                     <div class="container my-5 p-0" id="comments">
                         <div th:each="comment : ${comments}">
-                            <div class="card mb-3" th:id="comment+${comment.id}">
+                            <div class="card bg-light-dark mb-3" th:id="comment+${comment.id}">
                                 <div class="card-body">
                                     <div class="d-flex flex-start align-items-center">
                                         <img class="rounded-circle shadow-1-strong me-3"
@@ -197,7 +194,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-3 mt-3 index-table rightSidebar">
+                <!-- Earnings (Monthly) Card Example -->
+                <div class="index-table col-xl-3 col-lg-3 mb-4">
                     <div th:if="${ad!=null} and ${#lists.size(ad)!=0}" class="myAd-right p-1">
                         <div style="width: 100%; border-left: 1px solid black;">
                             <div class="bg-dark text-white pl-1 ">ad</div>
@@ -205,7 +203,9 @@
                         </div>
                     </div>
                 </div>
+
             </div>
+            
         </div>
 
     </div>
@@ -279,7 +279,7 @@
         });
         function controlWidth() {
             var width = window.innerWidth;
-            if (width <= 1024) {
+            if (width <= 992) {
                 elem.className = "newLessonIndex";
                 childElem.style.display = "none";
                 document.getElementById("content-table").style.display = "none";
@@ -287,7 +287,7 @@
                 // toggleBtn.style.boxShadow = "none";
                 toggleBtn.style.display = "inline";
             }
-            else if (width > 1024) {
+            else if (width > 992) {
                 // elem.style.display = "none";
                 elem.className = classes;
                 childElem.style.display = "block";

@@ -8,11 +8,14 @@ if (nodeList !== null) {
     // Create a new div element
     var newDiv = document.createElement("div");
 
-    // Create a new code element
-    var codeElement = document.createElement("code");
-
     // Append the contents of node to the newDiv
     newDiv.innerHTML = node.innerHTML;
+
+    // Replace &nbsp; with space (" ") in newDiv inner HTML
+    newDiv.innerHTML = newDiv.innerHTML.replace(/&nbsp;/g, " ");
+
+    // Create a new code element
+    var codeElement = document.createElement("code");
 
     // Append the newDiv to the codeElement
     codeElement.appendChild(newDiv);
@@ -33,5 +36,3 @@ if (nodeList !== null) {
     node.className = "code";
   }
 }
-
-
