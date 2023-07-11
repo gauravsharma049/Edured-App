@@ -76,11 +76,11 @@
                                 <div class="card-body p-4">
                                     <div class="d-flex flex-start w-100">
                                         <img class="rounded-circle shadow-1-strong me-3"
-                                            src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(21).webp"
+                                            th:src="@{/img/static_img/anonymoususer.jpg}"
                                             alt="avatar" width="65" height="65" />
                                         <div class="w-100">
                                             <h5>Add a comment</h5>
-                                            <ul class="rating m-0 mb-1 d-flex list-unstyled" data-mdb-toggle="rating">
+                                            <!-- <ul class="rating m-0 mb-1 d-flex list-unstyled" data-mdb-toggle="rating">
                                                 <li>
                                                     <i class="far fa-star fa-sm text-danger" title="Bad"></i>
                                                 </li>
@@ -96,7 +96,7 @@
                                                 <li>
                                                     <i class="far fa-star fa-sm text-danger" title="Excellent"></i>
                                                 </li>
-                                            </ul>
+                                            </ul> -->
                                             <form th:action="@{/t/add-comment}" method="post" th:object="${comment}">
                                                 <div class="form-outline">
                                                     <input class="d-none" type="text" name="" id=""
@@ -124,7 +124,7 @@
                                 <div class="card-body">
                                     <div class="d-flex flex-start align-items-center">
                                         <img class="rounded-circle shadow-1-strong me-3"
-                                            src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(19).webp"
+                                            th:src="@{/img/static_img/anonymoususer.jpg}"
                                             alt="avatar" width="60" height="60" />
                                         <div>
                                             <h6 class="fw-bold text-dark mb-1" th:text="${comment.commentUser.name}">
@@ -161,7 +161,7 @@
                                     class="card-footer commentReply py-3 border-0" style="background-color: #f8f9fa;">
                                     <div class="d-flex flex-start w-100">
                                         <img class="rounded-circle shadow-1-strong me-3"
-                                            src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(19).webp"
+                                            th:src="@{/img/static_img/anonymoususer.jpg}"
                                             alt="avatar" width="40" height="40" />
                                         <div class="form-outline w-100">
                                             <form onsubmit="submitForm(this)" th:action="@{/t/add-comment}"
