@@ -44,9 +44,10 @@ public class CourseServices {
 
     public List<Course> getCourseByTeacherId(Principal principal){
         EduredUser user = userService.getLoggedInUser(principal);
-        if(user == null){
+        if(user == null || !user.getRole().equals("ROLE_TEACHER")){
             return null;
         }
+        
         long userId = user.getId();
         long teacherId = teacherService.findByUserId(userId).getId();
         List<Course> courses = courseRepository.findByTeacherId(teacherId);

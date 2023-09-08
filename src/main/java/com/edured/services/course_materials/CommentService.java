@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.edured.home.LoggedInUserInfo;
+import com.edured.controller.home.LoggedInUserInfo;
 import com.edured.model.course_materials.Comment;
 import com.edured.repository.course_materials.CommentRepository;
 import com.edured.repository.users.EduredUserRepository;

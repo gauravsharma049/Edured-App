@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.edured.home.LoggedInUserInfo;
+import com.edured.controller.home.LoggedInUserInfo;
 import com.edured.model.course_materials.Comment;
 import com.edured.model.course_materials.Lesson;
 import com.edured.model.course_materials.Topic;
@@ -56,7 +56,7 @@ public class CourseController {
     }
     
     @GetMapping("/{c-slug}/{t-slug}")
-    public String getCoursePage(@PathVariable("c-slug") String courseSlug, @PathVariable("t-slug") String topicSlug, Model model){
+    public String getCoursePage(@PathVariable("c-slug") String courseSlug, @PathVariable("t-slug") String topicSlug, Model model, HttpServletRequest request){
         boolean status=false;
         Topic topic;
         try{
@@ -66,7 +66,13 @@ public class CourseController {
             if (status){
                 model.addAttribute("topic", topic);
                 model.addAttribute("comments", commentService.getCommentsByTopicId(topic.getId()));
-                topicService.updateTopicViewCount(topic.getId());
+                String referer = request.getHeader("Referer");
+                String currentUrl = request.getRequestURL().toString();
+                System.out.println("referer: "+referer);
+                System.out.println("currentUrl: "+currentUrl);
+                if(referer != null && !referer.equalsIgnoreCase(currentUrl)){
+                    topicService.updateTopicViewCount(topic.getId());
+                }
                 Comment comment = new Comment();
                 comment.setTopic(topic);
                 model.addAttribute("comment", comment);

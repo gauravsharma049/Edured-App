@@ -1,7 +1,10 @@
 package com.edured.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -17,10 +20,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.edured.dto.EduredUserDto;
+import com.edured.model.userInfo.AboutUser;
+import com.edured.model.userInfo.UserEducation;
+import com.edured.model.userInfo.UserWorkExperience;
 import com.edured.model.users.Admin;
 import com.edured.model.users.EduredUser;
 import com.edured.model.users.Student;
 import com.edured.model.users.Teacher;
+import com.edured.services.user_info.UserInfoService;
 import com.edured.services.users.AdminService;
 import com.edured.services.users.EduredUserService;
 import com.edured.services.users.StudentService;
@@ -39,6 +46,8 @@ public class UserController {
     EduredUserService userService;
     @Autowired
     AdminService adminService;
+    @Autowired
+    private UserInfoService userInfoService;
 
     @PostMapping("/signup")
     public String SignUp(@Valid @ModelAttribute("student") EduredUserDto userDto, BindingResult bindingResult,
@@ -87,7 +96,17 @@ public class UserController {
     // }
 
     @GetMapping("/teacher-signup")
-    public String teacherSignUp(Model model) {
+    public String teacherSignUp(Model model, Principal principal) {
+        String role;
+        try {
+            role = userService.getUserByEmail(principal.getName()).getRole();
+        } catch (Exception e) {
+            role = "";
+        }
+
+        if(!role.equals("ROLE_ADMIN")){
+            return "redirect:/";
+        }
         // model.addAttribute("teacher", new Teacher());
         model.addAttribute("title", "Teacher SignUp");
         model.addAttribute("teacher", new EduredUserDto());
@@ -95,7 +114,8 @@ public class UserController {
     }
 
     @PostMapping("/teacher-signup")
-    public String teacherSignUp(@Valid @ModelAttribute("teacher") EduredUserDto userDto, BindingResult bindingResult, RedirectAttributes attributes, HttpSession session) {
+    public String teacherSignUp(@Valid @ModelAttribute("teacher") EduredUserDto userDto, BindingResult bindingResult,
+            RedirectAttributes attributes, HttpSession session) {
         if (bindingResult.hasErrors()) {
             System.out.println(bindingResult.getAllErrors());
             return "teacher-signup";
@@ -160,4 +180,31 @@ public class UserController {
         return "redirect:/logout";
     }
 
+    @PostMapping("/work")
+    public String saveUpdateUserWorkExperience(
+            @ModelAttribute("workExperience") UserWorkExperience userWorkExperience, Principal principal, HttpServletRequest request) {
+        System.out.println(userWorkExperience.getCompanyName());
+        System.out.println(userWorkExperience.getPosition());
+        System.out.println(userWorkExperience.getStartDate());
+        System.out.println(userWorkExperience.getEndDate());
+        System.out.println(userWorkExperience.getDescription());
+        userInfoService.updateUserWorkExperience(userWorkExperience, principal);
+        String referer = request.getHeader("Referer");
+        return "redirect:"+ referer;
+    }
+
+    @PostMapping("/education")
+    public String saveUpdateUserEducation(@ModelAttribute("education") UserEducation userEducation,Principal principal, HttpServletRequest request) {
+        System.out.println(userEducation.getSchoolName());
+        System.out.println(userEducation.getDegree());
+        System.out.println(userEducation.getStartDate());
+        System.out.println(userEducation.getEndDate());
+        System.out.println(userEducation.getDescription());
+        userInfoService.updateUserEducation(userEducation, principal);
+        String referer = request.getHeader("Referer");
+        String currentUrl = request.getRequestURL().toString();
+        System.out.println("current url: "+currentUrl);
+        System.out.println("referer: "+referer);
+        return "redirect:"+ referer;
+    }
 }

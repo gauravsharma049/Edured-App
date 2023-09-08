@@ -1,4 +1,4 @@
-package com.edured.home;
+package com.edured.controller.home;
 
 import java.security.Principal;
 

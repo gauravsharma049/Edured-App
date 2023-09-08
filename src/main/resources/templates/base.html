@@ -45,9 +45,9 @@
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/#courses}">Courses</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" th:href="@{/blog}">Blog</a>
-                    </li>
+                    </li> -->
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/contact-us}">Contact</a>
                     </li>
@@ -82,8 +82,10 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <!-- <div class="dropdown-divider"></div> -->
-                            <a class="dropdown-item"
-                                th:href="@{/dashboard/{username}/(username = ${loggedinuser.email})}">Profile</a>
+                            <a th:if="${loggedinuser.role != 'ROLE_ADMIN'}" class="dropdown-item"
+                                th:href="@{/dashboard/{username}(username = ${loggedinuser.email})}">Profile</a>
+                            <a th:if="${loggedinuser.role == 'ROLE_ADMIN'}" class="dropdown-item"
+                                th:href="@{/home/dashboard}">Dashboard</a>
 
                             <form th:action="@{/logout}" method="post">
                                 <button class="dropdown-item" type="submit">Logout</button>

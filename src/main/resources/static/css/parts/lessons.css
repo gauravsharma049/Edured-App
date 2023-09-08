@@ -91,6 +91,7 @@
     /* color: white; */
     max-height: 600px;
     overflow: auto;
+    margin: 10px 0 10px 0;
 
 }
 .bg-light-dark{

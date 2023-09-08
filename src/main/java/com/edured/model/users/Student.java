@@ -1,6 +1,8 @@
 package com.edured.model.users;
 
 import com.edured.model.course_materials.Course;
+import com.edured.model.userInfo.AboutUser;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,4 +33,6 @@ public class Student {
 
     @OneToOne(cascade = CascadeType.ALL)
     private EduredUser user;
+    @OneToOne(cascade = CascadeType.ALL)
+    private AboutUser aboutUser;
 }

@@ -153,6 +153,253 @@
 
         </div>
     </div>
+
+    <div th:fragment="aboutUserForm2(obj)">
+        <!-- bootstrap modal with form with five input fields -->
+        <div th:if="${loggedinuser != 'anonymous'}">
+            <div class="modal fade" id="editUserDetails2" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true" th:if="${loggedinuser.username == userdetail.user.username}">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Edit About</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form method="post">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <input type="text" value="2" name="formNumber" style="display: none;">
+                                    <div class="mb-2">
+                                        <label for="about" class="form-label"><small>About</small></label>
+                                        <textarea class="form-control" name="about" id="about" required
+                                            placeholder="about yourself" style="height: 150px;"
+                                            th:text="${obj.aboutUser != null ? obj.aboutUser.about : ''}"></textarea>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="yearOfGraduation" class="form-label"><small>Year Of
+                                                Graduation</small></label>
+                                        <input type="text" required class="form-control" name="endDate"
+                                            id="yearOfGraduation" placeholder="Year of graduation"
+                                            th:value="${obj.aboutUser?.userEducations != null and obj.aboutUser.userEducations.size() > 0 ? obj.aboutUser.userEducations[0].endDate : ''}">
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="yearOfGraduation" class="form-label"><small>Education</small></label>
+                                        <input type="text" required class="form-control" id="education" name="education"
+                                            placeholder="School/College"
+                                            th:value="${obj.aboutUser?.userEducations != null and obj.aboutUser.userEducations.size() > 0 ? obj.aboutUser.userEducations[0].schoolName : ''}">
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="worksAt" class="form-label"><small>Works At</small></label>
+                                        <input type="text" class="form-control" id="worksAt" name="worksAt"
+                                            placeholder="company/organisation"
+                                            th:value="${obj.aboutUser?.userWorkExperiences != null and obj.aboutUser.userWorkExperiences.size() > 0 ? obj.aboutUser.userWorkExperiences[0].companyName : ''}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:fragment="aboutUserForm1(obj)">
+        <!-- bootstrap modal with form with five input fields -->
+        <div th:if="${loggedinuser !='anonymous'}">
+            <div class="modal fade" id="editUserDetails1" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true" th:if="${loggedinuser.username == userdetail.user.username}">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Edit Info</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form method="post">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <input type="text" name="formNumber" value="1" style="display: none;">
+                                    <div class="mb-2">
+                                        <label for="name" class="form-label"><small>Name</small></label>
+                                        <input type="text" class="form-control" name="name" id="name"
+                                            placeholder="Your Name" th:value="${obj.user.name}">
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="headline" class="form-label"><small>Headline/Skills</small></label>
+                                        <input type="text" class="form-control" name="headline" id="headline"
+                                            placeholder="Headline/skills"
+                                            th:value="${obj.aboutUser != null ? obj.aboutUser.skills : ''}">
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="country" class="form-label"><small>Country</small></label>
+                                        <select name="" id="country" class="form-control">
+                                            <option value="">Select</option>
+                                            <option value="">India</option>
+                                            <option value="">America</option>
+                                        </select>
+                                    </div>
+    
+                                    <div class="mb-2">
+                                        <label for="github-url" class="form-label"><small>Github url</small></label>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text">@</span>
+                                            <input type="text" class="form-control" name="githubUrl" id="github-url"
+                                                placeholder="Github url"
+                                                th:value="${obj.aboutUser != null ? obj.aboutUser.githubUrl : ''}">
+                                        </div>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="linkedIn-url" class="form-label"><small>LinkdIn url</small></label>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text">@</span>
+                                            <input type="text" class="form-control" id="linkdIn-url" name="linkdInUrl"
+                                                placeholder="LinkedIn url"
+                                                th:value="${obj.aboutUser != null ? obj.aboutUser.linkedinUrl : ''}">
+                                        </div>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="website-url" class="form-label"><small>website</small></label>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text">@</span>
+                                            <input type="text" class="form-control" id="website-url" name="websiteUrl"
+                                                placeholder="your website url"
+                                                th:value="${obj.aboutUser != null ? obj.aboutUser.websiteUrl : ''}">
+                                        </div>
+                                    </div>
+    
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:fragment="aboutUserForm3(obj)">
+        <!-- bootstrap modal with form with five input fields -->
+        <div class="modal fade" id="editUserDetails3" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Work Experience</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form method="post">
+                        <div class="modal-body">
+                            <input type="text" name="formNumber" value="1" style="display: none;">
+                            <div class="mb-2">
+                                <label for="companyName" class="form-label"><small>Company Name</small></label>
+                                <input type="text" class="form-control" name="companyName" id="companyName"
+                                    placeholder="Company Name">
+                            </div>
+                            <div class="mb-2">
+                                <label for="position" class="form-label"><small>Position</small></label>
+                                <input type="text" class="form-control" name="position" id="position"
+                                    placeholder="Position">
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <label for="startDate" class="form-label"><small>Start Date</small></label>
+                                    <input type="text" name="startDate" id="startDate" class="form-control"
+                                        placeholder="Start Date">
+                                </div>
+                                <div class="col">
+                                    <label for="endDate" class="form-label"><small>End Date</small></label>
+                                    <input type="text" id="endDate" name="endDate" class="form-control"
+                                        placeholder="End Date">
+                                </div>
+                            </div>
+
+                            <div class="mb-2">
+                                <label for="description" class="form-label"><small>Description</small></label>
+                                <textarea class="form-control" name="about" id="description" required
+                                    placeholder="description" style="height: 150px;"></textarea>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:fragment="aboutUserForm4(obj)">
+        <!-- bootstrap modal with form with five input fields -->
+        <div th:if="${loggedinuser != 'anonymous'}">
+            <div class="modal fade" id="editUserDetails4" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true" th:if="${loggedinuser.username == userdetail.user.username}">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Education</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form method="post" th:action="@{/education}" th:object="${userEducation}">
+                            <div class="modal-body">
+                                <input type="text" name="formNumber" value="1" style="display: none;">
+                                <div class="mb-2">
+                                    <label for="collegeName" class="form-label"><small>College</small></label>
+                                    <input type="text" class="form-control" name="schoolName" id="name"
+                                        placeholder="College Name" required>
+                                </div>
+                                <div class="mb-2">
+                                    <label for="degree" class="form-label"><small>Degree</small></label>
+                                        <input type="text" required name="degree" id="degree" class="form-control"
+                                            placeholder="Degree">
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col">
+                                        <label for="fieldOfStudy" class="form-label"><small>Field Of Study</small></label>
+                                        <input type="text" id="fieldOfStudy" required name="fieldOfStudy" class="form-control"
+                                            placeholder="Field of study">
+                                    </div>
+                                    <div class="col">
+                                        <label for="gradePoint" class="form-label"><small>Grade Point</small></label>
+                                        <input type="text" id="gradePoint" name="grade" class="form-control"
+                                            placeholder="Grade Point">
+                                    </div>
+                                </div>
+    
+                                <div class="row mb-2">
+                                    <div class="col">
+                                        <label for="startDate" class="form-label"><small>From</small></label>
+                                        <input type="date" required id="startDate" name="startDate" class="form-control"
+                                            placeholder="StartDate">
+                                    </div>
+                                    <div class="col">
+                                        <label for="dateOfDegreeCompletion" class="form-label"><small>To</small></label>
+                                        <input type="date" id="dateOfDegreeCompletion" name="endDate" class="form-control"
+                                            placeholder="Date of degree completion">
+                                    </div>
+                                </div>
+    
+                                <div class="mb-2">
+                                    <label for="description" class="form-label"><small>Description</small></label>
+                                    <textarea class="form-control" name="description" id="description" 
+                                        placeholder="description" style="height: 150px;"></textarea>
+                                </div>
+    
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

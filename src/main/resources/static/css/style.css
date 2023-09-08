@@ -244,6 +244,9 @@ ul{
     max-width: 100%;
     height: auto;
   }
+  .bannerImage{
+    max-width: 50%;
+  }
 
 /* ***************************************** */
 /* ********* Login Page CSS **************** */
@@ -393,6 +396,9 @@ ul{
     }
     .footer-list{
         width: 30%;
+    }
+    .bannerImage{
+        max-width: 80%;
     }
 }
 @media screen and (max-width: 767px) {

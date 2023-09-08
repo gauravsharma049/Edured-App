@@ -2,6 +2,8 @@ package com.edured.model.users;
 
 
 import com.edured.model.course_materials.Course;
+import com.edured.model.userInfo.AboutUser;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,7 +23,8 @@ public class Teacher {
 
     @OneToOne(cascade = CascadeType.ALL)
     private EduredUser user;
-
+    @OneToOne(cascade = CascadeType.ALL)
+    private AboutUser aboutUser;
     @Override
     public String toString() {
         return "Teacher{" +

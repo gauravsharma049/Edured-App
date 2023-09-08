@@ -1,6 +1,9 @@
 package com.edured.services.users;
 
 
+import com.edured.model.userInfo.AboutUser;
+import com.edured.model.userInfo.UserEducation;
+import com.edured.model.userInfo.UserWorkExperience;
 import com.edured.model.users.Teacher;
 import com.edured.repository.users.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
